@@ -1,0 +1,46 @@
+paths:
+
+get:
+  summary: Get Error Response
+  description: Get Error Response
+  tags:
+    - Success
+  responses:
+    "500":
+      description: Application Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              type: 
+                type: string
+                description: Error Type
+                example: ApplicationError
+              message:
+                type: string
+                description: Error Message
+                example: Error Message
+              errors:
+                type: array
+                description: Error Details
+                items:
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                      description: Error Code
+                      example: ErrorCode
+                    message:
+                      type: string
+                      description: Error Message
+                      example: Error Message
+                    details:
+                      type: string
+                      description: Error Details
+                      example: Error Details
+                    stack:
+                      type: string
+                      description: Error Stack
+                      example: Error Stack
+                

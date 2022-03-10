@@ -1,0 +1,32 @@
+{
+    "extends": "@istanbuljs/nyc-config-typescript",
+    "require": [
+        "ts-node/register"
+    ],
+    "sourceMap": true,
+    "instrument": true,
+    "all": true,
+    "exclude": [
+        "coverage/**",
+        "test/**",
+        "tools/**",
+        "benchmark/**",
+        "deps/**",
+        "test/**",
+        "dist/**",
+        "node_modules/**",
+        "**/*.d.ts"
+    ],
+    "reporter": [
+        "html",
+        "text",
+        "cobertura"
+    ],
+    "lines": 80,
+    "branches": 80,
+    "statements": 80,
+    "temp-directory": "coverage/tmp",
+    "omit-relative": false,
+    "resolve": "./lib",
+    "wrapper-length": 0
+}

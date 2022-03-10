@@ -1,0 +1,81 @@
+openapi: 3.0.0
+
+info:
+  version: 1.0.0
+  title: OpenAPI
+  description: Multi-file boilerplate for OpenAPI Specification.
+  license:
+    name: MIT
+  contact:
+    name: OpenAPI
+    url: www.openapi.org
+    email: support@example.com
+
+servers:
+  - url: http://localhost:3000
+
+paths:
+  /:
+    get:
+      summary: Get Success Response
+      description: Get Success Response
+      tags:
+        - Success
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Success Message
+                    example: Success
+                    
+  /errors:
+    get:
+      summary: Get Error Response
+      description: Get Error Response
+      tags:
+        - Success
+      responses:
+        "500":
+          description: Application Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  type: 
+                    type: string
+                    description: Error Type
+                    example: ApplicationError
+                  message:
+                    type: string
+                    description: Error Message
+                    example: Error Message
+                  errors:
+                    type: array
+                    description: Error Details
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Error Code
+                          example: ErrorCode
+                        message:
+                          type: string
+                          description: Error Message
+                          example: Error Message
+                        details:
+                          type: string
+                          description: Error Details
+                          example: Error Details
+                        stack:
+                          type: string
+                          description: Error Stack
+                          example: Error Stack
+                    

@@ -1,0 +1,30 @@
+version: '1'
+
+services:
+  mongo:
+    image: mongo:5.0.6-alpine
+    container_name: mongo-dev
+    restart: always
+    networks:
+      - dev-network
+    volumes:
+      - ./data/dev/mongo:/data/db
+    ports:
+      - "27017:27017"
+
+  redis:
+    image: redis:6.2.6-alpine
+    container_name: redis-dev
+    restart: always
+    networks:
+      - dev-network
+    volumes:
+      - ./data/dev/redis:/data
+    ports:
+      - "6379:6379"
+
+
+networks:
+  dev-network:
+    driver: bridge
+    
