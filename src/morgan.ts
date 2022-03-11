@@ -24,7 +24,8 @@ const morganMiddleware = morgan(
   // The message format is made from tokens, and each token is
   // defined inside the Morgan library.
   // You can create your custom token to show what do you want from a request.
-  ":method :url :status :res[content-length] - :response-time ms",
+  // ":method :url :status :res[content-length] - :response-time ms",
+  "dev",
   // Options: in this case, I overwrote the stream and the skip logic.
   // See the methods above.
   { stream, skip }
