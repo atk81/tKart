@@ -6,6 +6,7 @@ import { JWTPayload } from "../types/jwt";
 import jwt from "jsonwebtoken";
 import path from "path";
 import fs from "fs";
+import crypto from "crypto";
 
 const pathToPrivateKey = path.join(__dirname, '..', '..', '.private.key');
 const privateKey = fs.readFileSync(pathToPrivateKey, 'utf8');
@@ -96,6 +97,10 @@ UserSchema.methods.isValidPassword = async function (password: string): Promise<
     }
 }
 
+/**
+ * Generate JWT token
+ * @returns {string} JWT token
+ */
 UserSchema.methods.getJWTToken = function(): string{
     const payload: JWTPayload = {
         sub: this._id,
@@ -112,6 +117,21 @@ UserSchema.methods.getJWTToken = function(): string{
             expiresIn: '3 day',
         }
     );
+}
+
+/**
+ * Generate Forget Password Token
+ * Valid for 10 minutes
+ * @returns {string} forgot password token
+ */
+UserSchema.methods.getForgetPasswordToken = function(): string{
+    // Generate a random string and hash it
+    // Save the hash password in the database
+    // Send the token to the user
+    const forgetToken = crypto.randomBytes(20).toString('hex');
+    this.forgetPasswordToken = crypto.createHash('sha256').update(forgetToken).digest('hex');
+    this.forgetPasswordExpires = Date.now() + 10 * 60 * 1000; // 10 minutes
+    return forgetToken;
 }
 
 module.exports = mongoose.model("User", UserSchema);
