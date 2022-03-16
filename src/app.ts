@@ -6,6 +6,7 @@ import fileUpload from "express-fileupload";
 import YAML from "yamljs";
 import swaggerUi from "swagger-ui-express";
 import path from "path";
+import { apiRoutes } from "./routes";
 
 const app = express();
 
@@ -31,6 +32,11 @@ app.use(fileUpload());
  * Load the morgan middleware
  */
 app.use(morganMiddleware);
+
+/**
+ * Load the routes
+ */
+app.use(apiRoutes);
 
 /**
  * Load the error handler middleware

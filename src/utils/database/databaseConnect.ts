@@ -5,6 +5,7 @@ import MongooseConnection from "./mongooseConnection"
  * @returns {MongooseConnection} MongoClient instance
  */
 const mongoClient = (): MongooseConnection => {
+    // TODO: Change the URI to split into host and port
     let mongoClient: MongooseConnection;
     const defaultURI = "mongodb://localhost:27017/";
     if(process.env.NODE_ENV === 'production'){
