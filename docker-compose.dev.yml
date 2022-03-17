@@ -1,8 +1,21 @@
 version: '1'
 
 services:
+  # TODO: Add backend-service for local development
+  # tkart-backend:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile.dev
+  #   ports:
+  #   - 3000:3000
+  #   env_file: .env
+  #   depends_on:
+  #     - mongo
+  #   networks:
+  #     - dev-network
+
   mongo:
-    image: mongo:5.0.6-alpine
+    image: mongo:5.0.6
     container_name: mongo-dev
     restart: always
     networks:
@@ -15,4 +28,3 @@ services:
 networks:
   dev-network:
     driver: bridge
-    

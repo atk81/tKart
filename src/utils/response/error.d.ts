@@ -1,8 +1,8 @@
+import mongoose from "mongoose";
+
 export type ErrorType = "General" | "Raw" | "Validation" | "Unautherorized" | "Application";
 
-export type ErrorValidation = {
-    [key: string]: string;
-};
+export type ErrorValidation = mongoose.Error.ValidationError;
 
 export type Errors = string[] | Error[] | ErrorValidation[];
 

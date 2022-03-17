@@ -26,7 +26,10 @@ app.use(express.urlencoded({ extended: true }));
  * Cookie parser and file upload middleware
  */
 app.use(cookieParser());
-app.use(fileUpload());
+app.use(fileUpload({
+    useTempFiles: true,
+    tempFileDir: '/tmp/'
+}));
 
 /**
  * Load the morgan middleware
