@@ -7,7 +7,7 @@ export class CustomError extends Error{
     /**
      * Create a new custom error
      * @param httpStatusCode HTTP status code
-     * @param errorType Error type
+     * @param errorType Error type - @errorType
      * @param message Error message
      * @param errors Error details
      */

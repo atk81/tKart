@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import { Document, Schema, model } from "mongoose";
 import validator from "validator";
 import bcrypt from "bcryptjs";
 import { CustomError } from "../utils/response/error";
@@ -10,7 +10,26 @@ import crypto from "crypto";
 
 const pathToPrivateKey = path.join(__dirname, '..', '..', '.private.key');
 const privateKey = fs.readFileSync(pathToPrivateKey, 'utf8');
-const Schema = mongoose.Schema;
+
+/**
+ * User Schema interface
+ */
+export interface IUser extends Document {
+    name: string;
+    email: string;
+    password: string;
+    role?: string;
+    photo?: {
+        id: string;
+        secure_url: string;
+    };
+    forgetPasswordToken?: string;
+    forgetPasswordExpires?: Date;
+    createdAt: Date;
+    isValidPassword(password: string): Promise<boolean>;
+    getJWTToken(): string;
+    getForgetPasswordToken(): string;
+}
 
 /**
  * UserSchema - Mongoose schema for the User model
@@ -18,7 +37,7 @@ const Schema = mongoose.Schema;
  * @constant UserSchema
  * @memberof Models
  */
-const UserSchema = new Schema({
+const UserSchema = new Schema<IUser>({
     name: {
         type: String,
         required: [true, "Name is required"]
@@ -33,6 +52,7 @@ const UserSchema = new Schema({
     },
     password: {
         type: String,
+        select: false, // Hide the password on query, update, and find, but not on save
         required: [true, "Password is required"],
         minlength: [6, "Password must be at least 6 characters"],
         maxlength: [32, "Password must be at most 32 characters"],
@@ -134,4 +154,6 @@ UserSchema.methods.getForgetPasswordToken = function(): string{
     return forgetToken;
 }
 
-module.exports = mongoose.model("User", UserSchema);
+const User = model<IUser>("User", UserSchema);
+
+export default User;

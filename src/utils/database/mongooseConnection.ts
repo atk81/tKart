@@ -26,9 +26,7 @@ export default class MongooseConnection {
             logger.info(`Connected to MongoDB at ${this.uri}`);
         }catch(err){
             logger.error(`Error connecting to MongoDB at ${this.uri}`);
-            throw new CustomError(500, "Application", "DATABASE_CONNECTION_ERROR", [{
-                message: "Error connecting to MongoDB",
-            }]);
+            throw new CustomError(500, "Application", "DATABASE_CONNECTION_ERROR", ["Error connecting to MongoDB"]);
         }
     }
 

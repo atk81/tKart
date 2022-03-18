@@ -1,7 +1,8 @@
 import dotenv from 'dotenv';
 import app from "./app";
 import { logger } from './logger';
-// import { mongoClient } from './utils/database/databaseConnect';
+import { mongoClient } from './utils/database/databaseConnect';
+import { Cloudinary } from './config/cloudinary.config';
 import "./utils/response/success"; // Import customSuccess method
 
 /**
@@ -18,8 +19,14 @@ if (result.error) {
 /**
  * Database connection
  */
-// const mongoclient = mongoClient();
-// mongoclient.connect();
+const mongoclient = mongoClient();
+mongoclient.connect();
+
+/**
+ * Cloudinary configuration
+ */
+const cloudinary = Cloudinary.getInstance();
+cloudinary.config();
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -36,6 +43,6 @@ app.listen(process.env.PORT || 3000, () => {
  */
 process.on('SIGINT', () => {
     logger.warn('SIGINT signal received');
-    // mongoclient.disconnect();
+    mongoclient.disconnect();
     process.exit(0);
 });

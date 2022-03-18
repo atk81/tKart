@@ -6,7 +6,7 @@ import MongooseConnection from "./mongooseConnection"
  */
 const mongoClient = (): MongooseConnection => {
     let mongoClient: MongooseConnection;
-    const defaultURI = "mongodb://localhost:27017/";
+    const defaultURI = "mongodb://localhost:27017/tKart";
     if(process.env.NODE_ENV === 'production'){
         mongoClient = new MongooseConnection(process.env.MONGO_URI_PROD || defaultURI);
     } else if(process.env.NODE_ENV === 'test'){
