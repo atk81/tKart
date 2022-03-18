@@ -3,7 +3,7 @@ import cloudinary from 'cloudinary';
 // Should be singleton
 export class Cloudinary{
     private static instance: Cloudinary;
-    public cloudinary;
+    private cloudinary;
     /**
      * The Singleton's constructor should always be private to prevent direct
      * construction calls with the `new` operator.
@@ -35,13 +35,18 @@ export class Cloudinary{
         });
     }
 
-    async uploadUsersProfile(file){
-        // File name must be called photo. 
-        const fileName = file.photo;
-        return await this.cloudinary.uploader.upload(fileName, {
-            folder: "tKart/Users",
-            width: 150,
-            crops: "scale",
-        });
+    /**
+     * Upload the image to cloudinary.
+     * @param file File
+     * @return err | result
+     */
+    public async uploadUsersProfile(file){
+        // File name must be called photo.
+        // A user will have single photo.
+        // If photo is already exits for that user, then replace with this new photo.
+        // !TODO: Need to handle replace photo.
+        return await this.cloudinary.uploader.upload(file.photo.tempFilePath,
+            { folder: "tKart/Users"}
+        );
     }
 }

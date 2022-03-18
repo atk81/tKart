@@ -13,12 +13,6 @@ export const signup = async (req: Request, res: Response, next: NextFunction) =>
         return next(err);
     }
 
-    // !Need to Remove after sometimes
-    // !Start.........
-    let result = null;
-    if(req.files){
-        result = await Cloudinary.getInstance().uploadUsersProfile(req.files);
-    }
     // Check if the user already exists
     try{
         const user = await User.findOne({ email });
@@ -33,18 +27,29 @@ export const signup = async (req: Request, res: Response, next: NextFunction) =>
 
     // Create the user
     try{
-        const newUser: IUser = await User.create({ email, password, name, photo: result ? {
+        // !Need to Remove after sometimes
+        // !Start.........
+        let result = null;
+        if(req.files){
+            result = await Cloudinary.getInstance().uploadUsersProfile(req.files);
+            console.log(result);
+        }
+        const newUser: IUser = await User.create({ email, password, name, photo: (result ? {
             id: result.public_id,
             secure_url: result.secure_url,
-        }: null });
+        }: null) });
+        // Hide the password
+        newUser.password = null;
         // Generate the token
         cookieToken(newUser, res);
     }
     catch(err){
         if(err instanceof mongoose.Error.ValidationError) {
+            // !TODO: Need to handle the validation error!
             const error = new CustomError(400, "Validation", err.message, [err.message]);
             next(error);
         } else{
+            console.log(err);
             const error = new CustomError(500, "Application", "Error creating user", err);
             next(error);
         }

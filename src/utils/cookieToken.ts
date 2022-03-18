@@ -12,6 +12,7 @@ export const cookieToken = (user: IUser, res: Response) =>{
     // Send JSON response for mobile api
     res.cookie("token", token, options).customSuccess(200, "Success", {
         token,
-        options
+        options,
+        user
     });
 }

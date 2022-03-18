@@ -52,6 +52,7 @@ const UserSchema = new Schema<IUser>({
     },
     password: {
         type: String,
+        select: false, // Hide the password on query, update, and find, but not on save
         required: [true, "Password is required"],
         minlength: [6, "Password must be at least 6 characters"],
         maxlength: [32, "Password must be at most 32 characters"],
