@@ -12,7 +12,7 @@ import "./utils/response/success"; // Import customSuccess method
  */
 const result = dotenv.config();
 if (result.error) {
-    console.error(result.error);
+    logger.error(result.error);
   dotenv.config({ path: '.env.default' });
 }
 
