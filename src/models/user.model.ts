@@ -18,6 +18,8 @@ export interface IUser extends Document {
     name: string;
     email: string;
     password: string;
+    status?: string;
+    confirmEmailToken?: string;
     role?: string;
     photo?: {
         id: string;
@@ -58,6 +60,16 @@ const UserSchema = new Schema<IUser>({
         maxlength: [32, "Password must be at most 32 characters"],
         // Check password strength
         validate: [validator.isStrongPassword, "Password must contain at least one lowercase letter, one uppercase letter, one number, and one special character"]
+    },
+    status: {
+        type: String,
+        enum: ["active", "pending"],
+        default: "pending"
+    },
+    confirmEmailToken: {
+        type: String,
+        select: false,
+        unique: true,
     },
     role: {
         type: String,

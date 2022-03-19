@@ -10,5 +10,7 @@ declare namespace NodeJS{
         CLOUDINARY_NAME: string,
         CLOUDINARY_API_KEY: string,
         CLOUDINARY_API_SECRET: string,
+        SENDGRID_API_KEY: string,
+        SENDER_EMAIL: string,
     }
 }
