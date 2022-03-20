@@ -10,7 +10,8 @@ declare namespace NodeJS{
         CLOUDINARY_NAME: string,
         CLOUDINARY_API_KEY: string,
         CLOUDINARY_API_SECRET: string,
-        SENDGRID_API_KEY: string,
         SENDER_EMAIL: string,
+        MAILGUN_API_KEY: string,
+        MAILGUN_DOMAIN: string,
     }
 }
