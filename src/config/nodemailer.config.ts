@@ -1,12 +1,13 @@
 import nodemailer from "nodemailer";
-import sendgridNodemailer from "nodemailer-sendgrid-transport";
+import mailergunNodemailer from "nodemailer-mailgun-transport";
 
 export class Nodemailer{
     private transporter: nodemailer.Transporter;
     constructor(){
-        this.transporter = nodemailer.createTransport(sendgridNodemailer({
+        this.transporter = nodemailer.createTransport(mailergunNodemailer({
             auth: {
-                api_key: process.env.SENDGRID_API_KEY
+                api_key: process.env.MAILGUN_API_KEY,
+                domain: process.env.MAILGUN_DOMAIN,
             }
         }));
     }
