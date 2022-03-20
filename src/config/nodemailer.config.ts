@@ -26,7 +26,7 @@ export class Nodemailer{
             html: `<h1>Email Confirmation</h1>
             <h2>Hello ${name}</h2>
             <p>Thank you for subscribing. Please confirm your email by clicking on the following link</p>
-            <a href=http://localhost:${process.env.PORT}/confirm/${token}> Click here</a>
+            <a href=http://localhost:${process.env.PORT}/api/v1/signup/verify/${token}> Click here</a>
             </div>`,
         };
 
