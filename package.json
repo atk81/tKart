@@ -13,7 +13,7 @@
         "lint": "eslint . --ext .ts",
         "lint-and-fix": "eslint . --ext .ts --fix",
         "prepare": "husky install",
-        "test": "cross-env NODE_ENV=test mocha --exit --require ts-node/register test/**/*.spec.ts",
+        "test": "cross-env NODE_ENV=test mocha --exit --require ts-node/register test/**/*.spec.ts test/**.spec.ts",
         "coverage": "nyc npm run test",
         "generate-keyPair": "ts-node ./scripts/genKeyPair.ts"
     },
