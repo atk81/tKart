@@ -21,13 +21,7 @@ export default class MongooseConnection {
      * @memberof MongooseConnection
      */
     public async connect(): Promise<void> {
-        try {
-            await mongoose.connect(this.uri);
-            logger.info(`Connected to MongoDB at ${this.uri}`);
-        }catch(err){
-            logger.error(`Error connecting to MongoDB at ${this.uri}`);
-            throw new CustomError(500, "Application", "DATABASE_CONNECTION_ERROR", ["Error connecting to MongoDB"]);
-        }
+        await this.connectWithRetry(this.uri, 10);
     }
 
     /**
@@ -37,5 +31,21 @@ export default class MongooseConnection {
      */
     public async disconnect(): Promise<void> {
         await mongoose.disconnect();
+    }
+    
+    private async connectWithRetry(uri: string, retryCount: number): Promise<void> {
+        try {
+            await mongoose.connect(uri);
+            logger.info(`Connected to MongoDB at ${uri}`);
+        } catch (err) {
+            logger.error(`Error connecting to MongoDB at ${uri}`);
+            if (retryCount > 0) {
+                setTimeout(() => {
+                    this.connectWithRetry(uri, retryCount - 1);
+                }, 5000);
+            } else {
+                throw new CustomError(500, "Application", "DATABASE_CONNECTION_ERROR", ["Error connecting to MongoDB"]);
+            }
+        }
     }
 }
