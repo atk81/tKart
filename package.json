@@ -15,7 +15,10 @@
         "prepare": "husky install",
         "test": "cross-env NODE_ENV=test mocha --exit --require ts-node/register test/**/*.spec.ts test/**.spec.ts",
         "coverage": "nyc npm run test",
-        "generate-keyPair": "ts-node ./scripts/genKeyPair.ts"
+        "generate-keyPair": "ts-node ./scripts/genKeyPair.ts",
+        "docker-start": "docker-compose -f docker-compose.dev.yml up -d",
+        "docker-stop": "docker-compose -f docker-compose.dev.yml down",
+        "docker-start-build": "docker-compose -f docker-compose.dev.yml up --build -d"
     },
     "repository": {
         "type": "git",

@@ -1,12 +1,12 @@
-import { Document, Schema, model } from "mongoose";
-import validator from "validator";
 import bcrypt from "bcryptjs";
-import { CustomError } from "../utils/response/error";
-import { JWTPayload } from "../types/jwt";
-import jwt from "jsonwebtoken";
-import path from "path";
-import fs from "fs";
 import crypto from "crypto";
+import fs from "fs";
+import jwt from "jsonwebtoken";
+import { Document, model, Schema } from "mongoose";
+import path from "path";
+import validator from "validator";
+import { JWTPayload } from "../types/jwt";
+import { CustomError } from "../utils/response/error";
 
 const pathToPrivateKey = path.join(__dirname, '..', '..', '.private.key');
 const privateKey = fs.readFileSync(pathToPrivateKey, 'utf8');
@@ -103,15 +103,23 @@ const UserSchema = new Schema<IUser>({
  * @param next Callback
  * @returns void
  */
-UserSchema.pre("save", async function (next) {
-    if(!this.isModified("password")) return next();
-    try{
-       this.password = await bcrypt.hash(this.password, 12);
-        next(); 
-    } catch(err){
-        const error = new CustomError(500, "Application", "Error encrypting password", err);
-        next(error);
+UserSchema.pre("save", function (next) {
+    const user = this as IUser;
+    if (!user.isModified("password")) {
+        return next();
     }
+    bcrypt.genSalt(10, (err, salt) => {
+        if (err) {
+            return next(err);
+        }
+        bcrypt.hash(user.password, salt, (err, hash) => {
+            if (err) {
+                return next(err);
+            }
+            user.password = hash;
+            next();
+        });
+    });
 });
 
 /**

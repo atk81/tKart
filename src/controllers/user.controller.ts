@@ -35,24 +35,28 @@ export const signup = async (req: Request, res: Response, next: NextFunction) =>
     // Create the user
     try{
         // !File upload
+        if(user){
+            // delete the user from the database
+            await User.findByIdAndDelete(user._id);
+        }
         let result = null;
         if(req.files){
             result = await Cloudinary.getInstance().uploadUsersProfile(req.files);
         }
-        // if user already exists, update only the confirmEmailToken
-        if(!user){
-            user = await User.create({ email, password, name, photo: (result ? {
-                id: result.public_id,
-                secure_url: result.secure_url,
-            }: null) });
-        }
+        user = await User.create({
+            name,
+            email,
+            password,
+            status: "pending",
+            role: "user",
+            photo: result ? result.secure_url : null
+        });
+        // TODO: Send email to user to verify email, don't save into database
+        // TODO: Encypt the emailconfirmationtoken for readability
         // !Confirm email - Send email, and set the token into database
         const nodemailer: Nodemailer = new Nodemailer();
         const emailConfirmationToken = await user.getJWTToken();
         await nodemailer.sendEmailConfirmation(name, email, emailConfirmationToken);
-        // If someone already try to signup with the same email, but the user is not active,
-        // the new user will have update name, password and confirmEmailToken
-        await user.updateOne({ password, name, confirmEmailToken: emailConfirmationToken });
         // Hide the password
         user.password = null;
         // Generate the token
@@ -95,7 +99,7 @@ export const signupVerify = async (req: Request, res: Response, next: NextFuncti
                 return next(err);
             }
             // Update the user status
-            await user.updateOne({ status: "active", confirmEmailToken: null });
+            await user.updateOne({ status: "active" });
             // Hide the password
             user.password = null;
             // Generate the token
@@ -103,6 +107,57 @@ export const signupVerify = async (req: Request, res: Response, next: NextFuncti
         }
     } catch(err){
         const error = new CustomError(404, "General", "Token is invalid", err);
+        return next(error);
+    }
+}
+
+export const login = async (req: Request, res: Response, next: NextFunction) => {
+    // Get the user info {email, password}
+    const { email, password } = req.body;
+
+    // check if user, password is not empty
+    if(!email || !password) {
+        const err = new CustomError(400, "General", "email and password are required", null);
+        return next(err);
+    }
+
+    // Find the user
+    let user: IUser = null;
+    try{
+        user = await (await User.findOne({ email }).select("+password"));
+    } catch(err){
+        const error = new CustomError(500, "Application", "Error finding user", err);
+        return next(error);
+    }
+
+    // Check if the user exists
+    if(!user) {
+        const err = new CustomError(400, "General", "User not found", null);
+        return next(err);
+    }
+
+    // Check if the user is active
+    if(user.status !== "active") {
+        const err = new CustomError(400, "General", "User is not active", null);
+        return next(err);
+    }
+
+    // Check if the password is correct
+    if(!(await user.isValidPassword(password))) {
+        const err = new CustomError(400, "General", "Password is incorrect", null);
+        return next(err);
+    }
+    cookieToken(user, res);
+ 
+}
+
+export const logout = async (req: Request, res: Response, next: NextFunction) => {
+    // Remove the token from the cookies
+    try{
+        res.clearCookie("token");
+        res.customSuccess(200, "Logout successful", null);
+    } catch(err){
+        const error = new CustomError(500, "Application", "Error logging out", err);
         return next(error);
     }
 }
