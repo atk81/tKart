@@ -9,7 +9,7 @@ describe("/config/nodemailer", () => {
         sinon.restore();
     });
 
-    it("should send email for confirmation user email", async () => {
+    it.skip("should send email for confirmation user email", async () => {
         const nodemailer = new Nodemailer();
         logger.debug(nodemailer);
         const stub = sinon.stub(nodemailer, "sendEmailConfirmation");
