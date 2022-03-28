@@ -13,5 +13,9 @@ declare namespace NodeJS{
         SENDER_EMAIL: string,
         MAILGUN_API_KEY: string,
         MAILGUN_DOMAIN: string,
+        SMTP_HOST: string,
+        SMTP_PORT: string,
+        SMTP_USER: string,
+        SMTP_PASSWORD: string,
     }
 }

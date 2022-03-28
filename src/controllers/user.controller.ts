@@ -32,13 +32,14 @@ export const signup = async (req: Request, res: Response, next: NextFunction) =>
         return next(error);
     }
 
-    // Create the user
     try{
-        // !File upload
+        /**
+         * If the user already exists, delete the user and follow the same process.
+         */ 
         if(user){
-            // delete the user from the database
             await User.findByIdAndDelete(user._id);
         }
+        // Start uploading the photo.
         let result = null;
         if(req.files){
             result = await Cloudinary.getInstance().uploadUsersProfile(req.files);
@@ -47,27 +48,31 @@ export const signup = async (req: Request, res: Response, next: NextFunction) =>
             name,
             email,
             password,
-            status: "pending",
-            role: "user",
-            photo: result ? result.secure_url : null
+            photo: result ? result.secure_url : null,
         });
-        // TODO: Send email to user to verify email, don't save into database
-        // TODO: Encypt the emailconfirmationtoken for readability
-        // !Confirm email - Send email, and set the token into database
         const nodemailer: Nodemailer = new Nodemailer();
         const emailConfirmationToken = await user.getJWTToken();
-        await nodemailer.sendEmailConfirmation(name, email, emailConfirmationToken);
+        const url = `${req.protocol}://${req.get('host')}/api/v1/signup/verify/${emailConfirmationToken}`;
+        await nodemailer.sendEmailConfirmation(name, email, url);
         // Hide the password
         user.password = null;
         // Generate the token
         cookieToken(user, res);
     }
     catch(err){
+        /**
+         * If the type of error is a mongoose validation error, return a validation error
+         * If the error is from nodemailer, return a application error, but delete the user from the database.
+         * else return a application error.
+         */
         if(err instanceof mongoose.Error.ValidationError) {
             // !TODO: Need to handle the validation error!
             const error = new CustomError(400, "Validation", err.message, [err.message]);
             next(error);
         } else{
+            if(user){
+                await User.findByIdAndDelete(user._id);
+            }
             const error = new CustomError(500, "Application", "Error creating user", err);
             next(error);
         }
@@ -106,7 +111,7 @@ export const signupVerify = async (req: Request, res: Response, next: NextFuncti
             cookieToken(user, res);
         }
     } catch(err){
-        const error = new CustomError(404, "General", "Token is invalid", err);
+        const error = new CustomError(500, "Application", "Error while doing some user operation", err);
         return next(error);
     }
 }
@@ -147,8 +152,10 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
         const err = new CustomError(400, "General", "Password is incorrect", null);
         return next(err);
     }
+
+    // Hide the password
+    user.password = null;
     cookieToken(user, res);
- 
 }
 
 export const logout = async (req: Request, res: Response, next: NextFunction) => {
@@ -158,6 +165,45 @@ export const logout = async (req: Request, res: Response, next: NextFunction) =>
         res.customSuccess(200, "Logout successful", null);
     } catch(err){
         const error = new CustomError(500, "Application", "Error logging out", err);
+        return next(error);
+    }
+}
+
+export const forgotPassword = async (req: Request, res: Response, next: NextFunction) => {
+    // Get the user from the req. body
+    const { email } = req.body;
+    if(!email) {
+        const err = new CustomError(400, "General", "email is required", null);
+        return next(err);
+    }
+
+    // Check if the user exists
+    let user: IUser = null;
+    try{
+        user = await User.findOne({ email });
+    } catch(err){
+        const error = new CustomError(500, "Application", "Error finding user", err);
+        return next(error);
+    }
+
+    if(!user) {
+        const err = new CustomError(400, "General", "User not found", null);
+        return next(err);
+    }
+
+    // Generate the token, and send the email
+    const token = await user.generateForgetPasswordToken();
+    await user.save({ validateBeforeSave: false });
+    const url = `${req.protocol}://${req.get('host')}/api/v1/forgotPassword/verify/${token}`;
+    try {
+        const nodemailer: Nodemailer = new Nodemailer();
+        await nodemailer.sendForgotPassword(user.name, user.email, url);
+        res.customSuccess(200, "Email sent", null);
+    } catch(err){
+        // Reset the forgot password token
+        user.resetForgetPassword();
+        await user.save({ validateBeforeSave: false });
+        const error = new CustomError(500, "Application", "Error sending email", err);
         return next(error);
     }
 }
