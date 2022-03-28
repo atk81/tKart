@@ -19,7 +19,6 @@ export interface IUser extends Document {
     email: string;
     password: string;
     status?: string;
-    confirmEmailToken?: string;
     role?: string;
     photo?: {
         id: string;
@@ -30,7 +29,8 @@ export interface IUser extends Document {
     createdAt: Date;
     isValidPassword(password: string): Promise<boolean>;
     getJWTToken(): string;
-    getForgetPasswordToken(): string;
+    generateForgetPasswordToken(): string;
+    resetForgetPassword(): void;
 }
 
 /**
@@ -65,11 +65,6 @@ const UserSchema = new Schema<IUser>({
         type: String,
         enum: ["active", "pending"],
         default: "pending"
-    },
-    confirmEmailToken: {
-        type: String,
-        select: false,
-        unique: true,
     },
     role: {
         type: String,
@@ -164,7 +159,7 @@ UserSchema.methods.getJWTToken = function(): string{
  * Valid for 10 minutes
  * @returns {string} forgot password token
  */
-UserSchema.methods.getForgetPasswordToken = function(): string{
+UserSchema.methods.generateForgetPasswordToken = function(): string{
     // Generate a random string and hash it
     // Save the hash password in the database
     // Send the token to the user
@@ -172,6 +167,14 @@ UserSchema.methods.getForgetPasswordToken = function(): string{
     this.forgetPasswordToken = crypto.createHash('sha256').update(forgetToken).digest('hex');
     this.forgetPasswordExpires = Date.now() + 10 * 60 * 1000; // 10 minutes
     return forgetToken;
+}
+
+/**
+ * Reset all the forget password fields
+ */
+UserSchema.methods.resetForgetPassword = function(): void{
+    this.forgetPasswordToken = null;
+    this.forgetPasswordExpires = null;
 }
 
 const User = model<IUser>("User", UserSchema);
