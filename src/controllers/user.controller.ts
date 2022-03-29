@@ -8,6 +8,7 @@ import { Nodemailer } from '../config/nodemailer.config';
 import User, { IUser } from '../models/user.model';
 import { cookieToken } from '../utils/cookieToken';
 import { CustomError } from '../utils/response/error';
+import crypto from "crypto";
 const pathToPublicKey = path.join(__dirname, '..', '..', '.public.key.pem');
 const publicKey = fs.readFileSync(pathToPublicKey, 'utf8');
 
@@ -201,9 +202,39 @@ export const forgotPassword = async (req: Request, res: Response, next: NextFunc
         res.customSuccess(200, "Email sent", null);
     } catch(err){
         // Reset the forgot password token
-        user.resetForgetPassword();
+        user.resetForgetPasswordToken();
         await user.save({ validateBeforeSave: false });
         const error = new CustomError(500, "Application", "Error sending email", err);
+        return next(error);
+    }
+}
+
+export const resetPasswordByToken = async (req: Request, res: Response, next: NextFunction) => {
+    let token = req.params.token;
+    if(!token) {
+        const err = new CustomError(400, "General", "Token is required", null);
+        return next(err);
+    }
+
+    token = crypto.createHash('sha256').update(token).digest('hex');
+
+    try{
+        // find the user from the database, which expiray date in future.
+        const user = await User.findOne({
+            forgetPasswordToken: token,
+            forgetPasswordExpires: { $gt: Date.now() }
+        });
+        if(!user) {
+            const err = new CustomError(400, "General", "Token is invalid or has expired", null);
+            return next(err);
+        }
+        // Update the user password
+        user.password = req.body.password;
+        user.resetForgetPasswordToken();
+        await user.save();
+        res.customSuccess(200, "Password updated", null);
+    } catch(err){
+        const error = new CustomError(500, "Application", "Error resetting password", err);
         return next(error);
     }
 }
