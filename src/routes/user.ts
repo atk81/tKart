@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { signup, signupVerify, login, logout, forgotPassword } from "../controllers/user.controller";
+import { signup, signupVerify, login, logout, forgotPassword, resetPasswordByToken } from "../controllers/user.controller";
 import {BigPromise} from "../middleware/bigPromise";
 const app = Router();
 
@@ -9,5 +9,6 @@ app.get('/signup/verify/:token', BigPromise(signupVerify));
 app.post("/login", BigPromise(login));
 app.get("/logout", BigPromise(logout));
 app.post("/forgotPassword", BigPromise(forgotPassword));
+app.post("/forgotPassword/verify/:token", BigPromise(resetPasswordByToken));
 
 export { app as userRoutes };

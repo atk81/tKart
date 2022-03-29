@@ -30,7 +30,7 @@ export interface IUser extends Document {
     isValidPassword(password: string): Promise<boolean>;
     getJWTToken(): string;
     generateForgetPasswordToken(): string;
-    resetForgetPassword(): void;
+    resetForgetPasswordToken(): void;
 }
 
 /**
@@ -172,7 +172,7 @@ UserSchema.methods.generateForgetPasswordToken = function(): string{
 /**
  * Reset all the forget password fields
  */
-UserSchema.methods.resetForgetPassword = function(): void{
+UserSchema.methods.resetForgetPasswordToken = function(): void{
     this.forgetPasswordToken = null;
     this.forgetPasswordExpires = null;
 }
