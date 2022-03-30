@@ -238,3 +238,12 @@ export const resetPasswordByToken = async (req: Request, res: Response, next: Ne
         return next(error);
     }
 }
+
+export const dashboard = async (req: Request, res: Response, next: NextFunction) => {
+    const user = req.user;
+    if(!user) {
+        const err = new CustomError(400, "General", "User not found", null);
+        return next(err);
+    }
+    res.customSuccess(200, `Hello ${user.name}, You are loggedIn`, user);
+}
