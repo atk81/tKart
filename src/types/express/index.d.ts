@@ -12,5 +12,9 @@ declare global{
         export interface Response{
             customSuccess(httpStatusCode: number, message: string, data: unknown | null): Response;
         }
+
+        export interface Request{
+            user: IUser;
+        }
     }
 }
