@@ -1,3 +1,4 @@
+import crypto from "crypto";
 import { NextFunction, Request, Response } from 'express';
 import fs from "fs";
 import jwt from "jsonwebtoken";
@@ -8,7 +9,6 @@ import { Nodemailer } from '../config/nodemailer.config';
 import User, { IUser } from '../models/user.model';
 import { cookieToken } from '../utils/cookieToken';
 import { CustomError } from '../utils/response/error';
-import crypto from "crypto";
 const pathToPublicKey = path.join(__dirname, '..', '..', '.public.key.pem');
 const publicKey = fs.readFileSync(pathToPublicKey, 'utf8');
 
@@ -67,8 +67,7 @@ export const signup = async (req: Request, res: Response, next: NextFunction) =>
          * else return a application error.
          */
         if(err instanceof mongoose.Error.ValidationError) {
-            // !TODO: Need to handle the validation error!
-            const error = new CustomError(400, "Validation", err.message, [err.message]);
+            const error = new CustomError(400, "Validation", err.message, err);
             next(error);
         } else{
             if(user){
@@ -246,4 +245,52 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
         return next(err);
     }
     res.customSuccess(200, `Hello ${user.name}, You are loggedIn`, user);
+}
+
+export const changePassword = async (req: Request, res: Response, next: NextFunction) => {
+    const user = await User.findById(req.user._id).select("+password");
+    if(!user) {
+        const err = new CustomError(400, "General", "User not found", null);
+        return next(err);
+    }
+    const { oldPassword, newPassword } = req.body;
+    if(!oldPassword || !newPassword) {
+        const err = new CustomError(400, "General", "oldPassword and newPassword are required", null);
+        return next(err);
+    }
+    if(!(await user.isValidPassword(oldPassword))) {
+        const err = new CustomError(400, "General", "oldPassword is incorrect", null);
+        return next(err);
+    }
+    user.password = newPassword;
+    await user.save();
+    res.customSuccess(200, "Password updated", null);
+}
+
+export const updateProfile = async (req: Request, res: Response, next: NextFunction) => {
+    // Get the user from the req. body
+    const { name, email } = req.body;
+    if(!name || !email) {
+        const err = new CustomError(400, "General", "name and email are required", null);
+        return next(err);
+    }
+    let user = await User.findById(req.user._id);
+    // Start uploading the photo.
+    try{
+        let result = null;
+        if(req.files){
+            result = await Cloudinary.getInstance().updateUsersProfile(req.files, user.photo.id);
+        }
+        user = await user.updateOne({
+            name,
+            email,
+            photo: result ? {id: result.public_id, secureUrl: result.secure_url}: user.photo
+        }, {
+            runValidators: true
+        });
+    } catch(err){
+        const error = new CustomError(500, "Application", "Error while updating user", err);
+        return next(error);
+    }
+    res.customSuccess(200, "User updated", user);
 }

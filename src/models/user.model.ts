@@ -117,6 +117,12 @@ UserSchema.pre("save", function (next) {
     });
 });
 
+// TODO: Add a pre-hook on update to validate the schema.
+// UserSchema.pre("updateOne", function (next) {
+//     this.validateSync(next);
+//     next();
+// });
+
 /**
  * isValidPassword - Check if the password is valid
  * @param password Password to compare

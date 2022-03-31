@@ -4,7 +4,7 @@ export type ErrorType = "General" | "Raw" | "Validation" | "Unautherorized" | "A
 
 export type ErrorValidation = mongoose.Error.ValidationError;
 
-export type Errors = string[] | Error[] | ErrorValidation[];
+export type Errors = string[] | Error[] | ErrorValidation;
 
 export type ErrorResponse = {
     httpStatusCode: number;

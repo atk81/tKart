@@ -1,5 +1,5 @@
-import { ErrorType, Errors, ErrorResponse } from "./error.d";
-
+import { ErrorResponse, Errors, ErrorType } from "./error.d";
+import mongoose from "mongoose";
 export class CustomError extends Error{
     private httpStatusCode: number;
     private errorType: ErrorType;
@@ -12,6 +12,18 @@ export class CustomError extends Error{
      * @param errors Error details
      */
     constructor(httpStatusCode: number, errorType: ErrorType, message: string, errors: Errors){
+        if(errors["name"]==="MongoServerError" && errors["code"]===11000){
+            httpStatusCode = 400;
+            errorType = "Validation";
+            message = "Duplicate data on unique field";
+        }
+        // // Mongoose Validation error
+        if(errors instanceof mongoose.Error.ValidationError){
+            errorType = "Validation";
+            httpStatusCode = 400;
+            message = errors.message;
+        }
+
         super(message);
         this.name = this.constructor.name;
         this.httpStatusCode = httpStatusCode;
