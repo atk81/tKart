@@ -1,4 +1,5 @@
 import cloudinary from 'cloudinary';
+import { logger } from '../logger';
 
 // Should be singleton
 export class Cloudinary{
@@ -42,11 +43,29 @@ export class Cloudinary{
      */
     public async uploadUsersProfile(file){
         // File name must be called photo.
-        // A user will have single photo.
-        // If photo is already exits for that user, then replace with this new photo.
-        // !TODO: Need to handle replace photo.
+        // A user will have single user profile photo.
         return await this.cloudinary.uploader.upload(file.photo.tempFilePath,
             { folder: "tKart/Users"}
         );
+    }
+
+    /**
+     * 
+     * @param photo file
+     * @param photoId photoId of the user, if already exists
+     */
+    public async updateUsersProfile(photo, photoId?: string){
+        if(photoId){
+            this.cloudinary.uploader.destroy(photoId, (err, result) => {
+                if(err){
+                    logger.error(err);
+                    throw new Error(err);
+                }
+                logger.info(result);
+                // Image is deleted from cloudinary.
+            });
+        }
+
+        return this.uploadUsersProfile(photo);
     }
 }
