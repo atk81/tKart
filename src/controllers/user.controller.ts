@@ -1,16 +1,11 @@
 import crypto from "crypto";
 import { NextFunction, Request, Response } from 'express';
-import fs from "fs";
-import jwt from "jsonwebtoken";
 import mongoose from 'mongoose';
-import path from 'path';
 import { Cloudinary } from '../config/cloudinary.config';
 import { Nodemailer } from '../config/nodemailer.config';
 import User, { IUser } from '../models/user.model';
 import { cookieToken } from '../utils/cookieToken';
 import { CustomError } from '../utils/response/error';
-const pathToPublicKey = path.join(__dirname, '..', '..', '.public.key.pem');
-const publicKey = fs.readFileSync(pathToPublicKey, 'utf8');
 
 export const signup = async (req: Request, res: Response, next: NextFunction) => {
     // Get the user info from the request body
@@ -45,20 +40,24 @@ export const signup = async (req: Request, res: Response, next: NextFunction) =>
         if(req.files){
             result = await Cloudinary.getInstance().uploadUsersProfile(req.files);
         }
+        const confirmUserToken = crypto.randomBytes(20).toString('hex');
+        const date = new Date();
+        const confirmUserExpires: Date = new Date(date.setDate(date.getDate() + 10));
         user = await User.create({
             name,
             email,
             password,
             photo: result ? result.secure_url : null,
+            confirmUserToken,
+            confirmUserExpires,
         });
         const nodemailer: Nodemailer = new Nodemailer();
-        const emailConfirmationToken = await user.getJWTToken();
-        const url = `${req.protocol}://${req.get('host')}/api/v1/signup/verify/${emailConfirmationToken}`;
+        const url = `${req.protocol}://${req.get('host')}/api/v1/signup/verify/${confirmUserToken}`;
         await nodemailer.sendEmailConfirmation(name, email, url);
-        // Hide the password
-        user.password = null;
-        // Generate the token
-        cookieToken(user, res);
+        user.password = undefined;
+        user.confirmUserToken = undefined;
+        user.confirmUserExpires = undefined;
+        res.customSuccess(200, "User Created Successfully, Mail is send to user mail, please verify before login", {user, url});
     }
     catch(err){
         /**
@@ -87,30 +86,63 @@ export const signupVerify = async (req: Request, res: Response, next: NextFuncti
     }
 
     try{
-        // Verify token using JWT
-        const decode = jwt.verify(token,publicKey);
-        // Check for expiration
-        if(decode.exp < Date.now()) {
-            const err = new CustomError(400, "General", "Token has expired", null);
-            return next(err);
-        } else {
-            // Find the user
-            const user = await User.findById(decode.sub);
-            if(!user) {
-                const err = new CustomError(400, "General", "User not found", null);
-                return next(err);
-            } else if(user.status === "active") {
-                const err = new CustomError(400, "General", "User already verified", null);
-                return next(err);
-            }
-            // Update the user status
-            await user.updateOne({ status: "active" });
-            // Hide the password
-            user.password = null;
-            // Generate the token
-            cookieToken(user, res);
+        const result = await User.findOneAndUpdate({
+            confirmUserToken: req.params.token,
+            confirmUserExpires: { $gt: new Date() },
+            status: "pending",
+        }, {
+            status: "active",
+            confirmUserToken: null,
+            confirmUserExpires: null,
+        }, {
+                new: true,
+                runValidators: true,
+                rawResult: true,
+        });
+        
+        // TODO: if the result is null, return a error, but it's not working
+        /*
+        onSuccess: result: {
+            lastErrorObject: { n: 1, updatedExisting: true },
+            value: {
+                _id: new ObjectId("624858b6cf6f5e642430577d"),
+                name: 'ashutosh',
+                email: 'test2@test.com',
+                status: 'active',
+                role: 'user',
+                confirmUserToken: null,
+                confirmUserExpires: null,
+                createdAt: 2022-04-02T14:07:50.844Z,
+                __v: 0
+            },
+            ok: 1
         }
+
+        onFailure: result: {
+            lastErrorObject: { n: 0, updatedExisting: false },
+            value: null,
+            ok: 1
+        }
+
+        so if the result.value is null, return a error.
+
+        But it's not working.
+
+        Getting the error:
+        TypeError: Cannot read properties of null (reading 'name')
+        at new CustomError (/app/src/utils/response/error.ts:15:18)
+        at /app/src/controllers/user.controller.ts:104:25
+        at Generator.next (<anonymous>)
+        at fulfilled (/app/src/controllers/user.controller.ts:5:58)
+        at processTicksAndRejections (node:internal/process/task_queues:96:5)
+        */
+        // if(result.value===null) {
+        //     const err = new CustomError(400, "General", "Token is invalid or expired", null);
+        //     return next(err);
+        // }
+        res.customSuccess(200, "User verified successfully", {user: result.value});
     } catch(err){
+        console.log(err);
         const error = new CustomError(500, "Application", "Error while doing some user operation", err);
         return next(error);
     }

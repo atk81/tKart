@@ -24,6 +24,8 @@ export interface IUser extends Document {
         id: string;
         secure_url: string;
     };
+    confirmUserToken?: string;
+    confirmUserExpires?: Date;
     forgetPasswordToken?: string;
     forgetPasswordExpires?: Date;
     createdAt: Date;
@@ -79,13 +81,17 @@ const UserSchema = new Schema<IUser>({
             type: String,
         },
     },
+    confirmUserToken: {
+        type: String,
+    },
+    confirmUserExpires: {
+        type: Date,
+    },
     forgetPasswordToken: {
         type: String,
-        default: null
     },
     forgetPasswordExpires: {
         type: Date,
-        default: null
     },
     createdAt: {
         type: Date,
@@ -179,8 +185,8 @@ UserSchema.methods.generateForgetPasswordToken = function(): string{
  * Reset all the forget password fields
  */
 UserSchema.methods.resetForgetPasswordToken = function(): void{
-    this.forgetPasswordToken = null;
-    this.forgetPasswordExpires = null;
+    this.forgetPasswordToken = undefined;
+    this.forgetPasswordExpires = undefined;
 }
 
 const User = model<IUser>("User", UserSchema);
