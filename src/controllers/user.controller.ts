@@ -142,7 +142,6 @@ export const signupVerify = async (req: Request, res: Response, next: NextFuncti
         // }
         res.customSuccess(200, "User verified successfully", {user: result.value});
     } catch(err){
-        console.log(err);
         const error = new CustomError(500, "Application", "Error while doing some user operation", err);
         return next(error);
     }
