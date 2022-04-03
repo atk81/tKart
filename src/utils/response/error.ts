@@ -12,11 +12,11 @@ export class CustomError extends Error{
      * @param errors Error details
      */
     constructor(httpStatusCode: number, errorType: ErrorType, message: string, errors: Errors){
-        if(errors["name"]==="MongoServerError" && errors["code"]===11000){
-            httpStatusCode = 400;
-            errorType = "Validation";
-            message = "Duplicate data on unique field";
-        }
+        // if(errors["name"]==="MongoServerError" && errors["code"]===11000){
+        //     httpStatusCode = 400;
+        //     errorType = "Validation";
+        //     message = "Duplicate data on unique field";
+        // }
         // // Mongoose Validation error
         if(errors instanceof mongoose.Error.ValidationError){
             errorType = "Validation";

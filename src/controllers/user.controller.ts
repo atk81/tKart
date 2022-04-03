@@ -229,7 +229,7 @@ export const forgotPassword = async (req: Request, res: Response, next: NextFunc
     try {
         const nodemailer: Nodemailer = new Nodemailer();
         await nodemailer.sendForgotPassword(user.name, user.email, url);
-        res.customSuccess(200, "Email sent", null);
+        res.customSuccess(200, "Email sent", {url});
     } catch(err){
         // Reset the forgot password token
         user.resetForgetPasswordToken();
@@ -294,8 +294,15 @@ export const changePassword = async (req: Request, res: Response, next: NextFunc
         return next(err);
     }
     user.password = newPassword;
-    await user.save();
-    res.customSuccess(200, "Password updated", null);
+    try{
+        await user.save( { validateBeforeSave: true });
+        res.customSuccess(200, "Password updated", null);
+    }
+    catch(err){
+        const error = new CustomError(500, "Application", "Error updating password", err);
+        return next(error);
+    }
+
 }
 
 export const updateProfile = async (req: Request, res: Response, next: NextFunction) => {
@@ -324,4 +331,95 @@ export const updateProfile = async (req: Request, res: Response, next: NextFunct
         return next(error);
     }
     res.customSuccess(200, "User updated", user);
+}
+
+export const allUsers = async (req: Request, res: Response, next: NextFunction) => {
+    try{
+        const users = await User.find({});
+        res.customSuccess(200, "Users found", users);
+    }
+    catch(err){
+        const error = new CustomError(500, "Application", "Error finding users", err);
+        return next(error);
+    }
+}
+
+export const user = async (req: Request, res: Response, next: NextFunction) => {
+    const userId = req.params.id;
+    if(!userId) {
+        const err = new CustomError(400, "General", "User id is required", null);
+        return next(err);
+    }
+    if(!mongoose.Types.ObjectId.isValid(userId)) {
+        const err = new CustomError(400, "General", "User id is invalid", null);
+        return next(err);
+    }
+
+    try{
+        const user = await User.findById(userId);
+        if(!user) {
+            const err = new CustomError(400, "General", "User not found", null);
+            return next(err);
+        }
+        res.customSuccess(200, "User found", user);
+    } catch(err){
+        const error = new CustomError(500, "Application", "Error finding user", err);
+        return next(error);
+    }
+}
+
+export const updateProfileByAdmin = async (req: Request, res: Response, next: NextFunction) => {
+    const userId = req.params.id;
+    if(!userId) {
+        const err = new CustomError(400, "General", "User id is required", null);
+        return next(err);
+    }
+    if(!mongoose.Types.ObjectId.isValid(userId)) {
+        const err = new CustomError(400, "General", "User id is invalid", null);
+        return next(err);
+    }
+
+    try{
+        const { name, email, role } = req.body;
+        if(!name || !email || !role) {
+            const err = new CustomError(400, "General", "name, email and role are required", null);
+            return next(err);
+        }
+        const user = await User.findOneAndUpdate({
+            _id: userId,
+        }, {
+            name,
+            email,
+            role
+        }, {
+            new: true,
+            runValidators: true
+        });
+        res.customSuccess(200, "User updated", user);
+    } catch(err){
+        const error = new CustomError(500, "Application", "Error occured while updating user", err);
+        return next(error);
+    }
+}
+
+export const deleteUser = async (req: Request, res: Response, next: NextFunction) => {
+    const userId = req.params.id;
+    if(!userId) {
+        const err = new CustomError(400, "General", "User id is required", null);
+        return next(err);
+    }
+    if(!mongoose.Types.ObjectId.isValid(userId)) {
+        const err = new CustomError(400, "General", "User id is invalid", null);
+        return next(err);
+    }
+
+    try{
+        const user = await User.findOneAndDelete({
+            _id: userId,
+        });
+        res.customSuccess(200, "User Deleted", user);
+    } catch(err){
+        const error = new CustomError(500, "Application", "Error occured while deleting user", err);
+        return next(error);
+    }
 }
