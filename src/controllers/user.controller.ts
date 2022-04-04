@@ -1,16 +1,11 @@
 import crypto from "crypto";
 import { NextFunction, Request, Response } from 'express';
-import fs from "fs";
-import jwt from "jsonwebtoken";
 import mongoose from 'mongoose';
-import path from 'path';
 import { Cloudinary } from '../config/cloudinary.config';
 import { Nodemailer } from '../config/nodemailer.config';
 import User, { IUser } from '../models/user.model';
 import { cookieToken } from '../utils/cookieToken';
 import { CustomError } from '../utils/response/error';
-const pathToPublicKey = path.join(__dirname, '..', '..', '.public.key.pem');
-const publicKey = fs.readFileSync(pathToPublicKey, 'utf8');
 
 export const signup = async (req: Request, res: Response, next: NextFunction) => {
     // Get the user info from the request body
@@ -45,20 +40,24 @@ export const signup = async (req: Request, res: Response, next: NextFunction) =>
         if(req.files){
             result = await Cloudinary.getInstance().uploadUsersProfile(req.files);
         }
+        const confirmUserToken = crypto.randomBytes(20).toString('hex');
+        const date = new Date();
+        const confirmUserExpires: Date = new Date(date.setDate(date.getDate() + 10));
         user = await User.create({
             name,
             email,
             password,
             photo: result ? result.secure_url : null,
+            confirmUserToken,
+            confirmUserExpires,
         });
         const nodemailer: Nodemailer = new Nodemailer();
-        const emailConfirmationToken = await user.getJWTToken();
-        const url = `${req.protocol}://${req.get('host')}/api/v1/signup/verify/${emailConfirmationToken}`;
+        const url = `${req.protocol}://${req.get('host')}/api/v1/signup/verify/${confirmUserToken}`;
         await nodemailer.sendEmailConfirmation(name, email, url);
-        // Hide the password
-        user.password = null;
-        // Generate the token
-        cookieToken(user, res);
+        user.password = undefined;
+        user.confirmUserToken = undefined;
+        user.confirmUserExpires = undefined;
+        res.customSuccess(200, "User Created Successfully, Mail is send to user mail, please verify before login", {user, url});
     }
     catch(err){
         /**
@@ -87,29 +86,61 @@ export const signupVerify = async (req: Request, res: Response, next: NextFuncti
     }
 
     try{
-        // Verify token using JWT
-        const decode = jwt.verify(token,publicKey);
-        // Check for expiration
-        if(decode.exp < Date.now()) {
-            const err = new CustomError(400, "General", "Token has expired", null);
-            return next(err);
-        } else {
-            // Find the user
-            const user = await User.findById(decode.sub);
-            if(!user) {
-                const err = new CustomError(400, "General", "User not found", null);
-                return next(err);
-            } else if(user.status === "active") {
-                const err = new CustomError(400, "General", "User already verified", null);
-                return next(err);
-            }
-            // Update the user status
-            await user.updateOne({ status: "active" });
-            // Hide the password
-            user.password = null;
-            // Generate the token
-            cookieToken(user, res);
+        const result = await User.findOneAndUpdate({
+            confirmUserToken: req.params.token,
+            confirmUserExpires: { $gt: new Date() },
+            status: "pending",
+        }, {
+            status: "active",
+            confirmUserToken: null,
+            confirmUserExpires: null,
+        }, {
+                new: true,
+                runValidators: true,
+                rawResult: true,
+        });
+        
+        // TODO: if the result is null, return a error, but it's not working
+        /*
+        onSuccess: result: {
+            lastErrorObject: { n: 1, updatedExisting: true },
+            value: {
+                _id: new ObjectId("624858b6cf6f5e642430577d"),
+                name: 'ashutosh',
+                email: 'test2@test.com',
+                status: 'active',
+                role: 'user',
+                confirmUserToken: null,
+                confirmUserExpires: null,
+                createdAt: 2022-04-02T14:07:50.844Z,
+                __v: 0
+            },
+            ok: 1
         }
+
+        onFailure: result: {
+            lastErrorObject: { n: 0, updatedExisting: false },
+            value: null,
+            ok: 1
+        }
+
+        so if the result.value is null, return a error.
+
+        But it's not working.
+
+        Getting the error:
+        TypeError: Cannot read properties of null (reading 'name')
+        at new CustomError (/app/src/utils/response/error.ts:15:18)
+        at /app/src/controllers/user.controller.ts:104:25
+        at Generator.next (<anonymous>)
+        at fulfilled (/app/src/controllers/user.controller.ts:5:58)
+        at processTicksAndRejections (node:internal/process/task_queues:96:5)
+        */
+        // if(result.value===null) {
+        //     const err = new CustomError(400, "General", "Token is invalid or expired", null);
+        //     return next(err);
+        // }
+        res.customSuccess(200, "User verified successfully", {user: result.value});
     } catch(err){
         const error = new CustomError(500, "Application", "Error while doing some user operation", err);
         return next(error);
@@ -198,7 +229,7 @@ export const forgotPassword = async (req: Request, res: Response, next: NextFunc
     try {
         const nodemailer: Nodemailer = new Nodemailer();
         await nodemailer.sendForgotPassword(user.name, user.email, url);
-        res.customSuccess(200, "Email sent", null);
+        res.customSuccess(200, "Email sent", {url});
     } catch(err){
         // Reset the forgot password token
         user.resetForgetPasswordToken();
@@ -263,8 +294,15 @@ export const changePassword = async (req: Request, res: Response, next: NextFunc
         return next(err);
     }
     user.password = newPassword;
-    await user.save();
-    res.customSuccess(200, "Password updated", null);
+    try{
+        await user.save( { validateBeforeSave: true });
+        res.customSuccess(200, "Password updated", null);
+    }
+    catch(err){
+        const error = new CustomError(500, "Application", "Error updating password", err);
+        return next(error);
+    }
+
 }
 
 export const updateProfile = async (req: Request, res: Response, next: NextFunction) => {
@@ -293,4 +331,95 @@ export const updateProfile = async (req: Request, res: Response, next: NextFunct
         return next(error);
     }
     res.customSuccess(200, "User updated", user);
+}
+
+export const allUsers = async (req: Request, res: Response, next: NextFunction) => {
+    try{
+        const users = await User.find({});
+        res.customSuccess(200, "Users found", users);
+    }
+    catch(err){
+        const error = new CustomError(500, "Application", "Error finding users", err);
+        return next(error);
+    }
+}
+
+export const user = async (req: Request, res: Response, next: NextFunction) => {
+    const userId = req.params.id;
+    if(!userId) {
+        const err = new CustomError(400, "General", "User id is required", null);
+        return next(err);
+    }
+    if(!mongoose.Types.ObjectId.isValid(userId)) {
+        const err = new CustomError(400, "General", "User id is invalid", null);
+        return next(err);
+    }
+
+    try{
+        const user = await User.findById(userId);
+        if(!user) {
+            const err = new CustomError(400, "General", "User not found", null);
+            return next(err);
+        }
+        res.customSuccess(200, "User found", user);
+    } catch(err){
+        const error = new CustomError(500, "Application", "Error finding user", err);
+        return next(error);
+    }
+}
+
+export const updateProfileByAdmin = async (req: Request, res: Response, next: NextFunction) => {
+    const userId = req.params.id;
+    if(!userId) {
+        const err = new CustomError(400, "General", "User id is required", null);
+        return next(err);
+    }
+    if(!mongoose.Types.ObjectId.isValid(userId)) {
+        const err = new CustomError(400, "General", "User id is invalid", null);
+        return next(err);
+    }
+
+    try{
+        const { name, email, role } = req.body;
+        if(!name || !email || !role) {
+            const err = new CustomError(400, "General", "name, email and role are required", null);
+            return next(err);
+        }
+        const user = await User.findOneAndUpdate({
+            _id: userId,
+        }, {
+            name,
+            email,
+            role
+        }, {
+            new: true,
+            runValidators: true
+        });
+        res.customSuccess(200, "User updated", user);
+    } catch(err){
+        const error = new CustomError(500, "Application", "Error occured while updating user", err);
+        return next(error);
+    }
+}
+
+export const deleteUser = async (req: Request, res: Response, next: NextFunction) => {
+    const userId = req.params.id;
+    if(!userId) {
+        const err = new CustomError(400, "General", "User id is required", null);
+        return next(err);
+    }
+    if(!mongoose.Types.ObjectId.isValid(userId)) {
+        const err = new CustomError(400, "General", "User id is invalid", null);
+        return next(err);
+    }
+
+    try{
+        const user = await User.findOneAndDelete({
+            _id: userId,
+        });
+        res.customSuccess(200, "User Deleted", user);
+    } catch(err){
+        const error = new CustomError(500, "Application", "Error occured while deleting user", err);
+        return next(error);
+    }
 }

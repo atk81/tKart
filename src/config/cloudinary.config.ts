@@ -68,4 +68,22 @@ export class Cloudinary{
 
         return this.uploadUsersProfile(photo);
     }
+
+    /**
+     * Upload the image to cloudinary.
+     * @param file File
+     * @return err | result
+     */
+    public async uploadProductPhotos(files){
+        // Iterate through the files and upload them to cloudinary.
+        // Return the result of each upload.
+        const promises = [];
+        logger.debug(files.photos);
+        for(const file of files.photos){
+            promises.push(this.cloudinary.uploader.upload(file.tempFilePath,
+                { folder: "tKart/Products"}
+            ));
+        }
+        return await Promise.all(promises);
+    }
 }

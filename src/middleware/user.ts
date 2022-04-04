@@ -1,6 +1,7 @@
 import User from "../models/user.model";
 import { Request, Response, NextFunction } from "express";
 import { verifyJWT } from "../utils/verifyJWT";
+import { CustomError } from "../utils/response/error";
 
 class UserMiddleware {
     public async isLoggedIn(req: Request, res: Response, next: NextFunction) {
@@ -25,6 +26,16 @@ class UserMiddleware {
         } catch(err) {
             return res.customSuccess(401, "Unauthorized", {});
         }  
+    }
+
+    public customRoles(...roles: string[]) {
+        return (req: Request, res: Response, next: NextFunction) => {
+            if(!roles.includes(req.user.role)) {
+                const err = new CustomError(403, "General", "You don't have permission to access this resource",null);
+                return next(err);
+            }
+            next();
+        }
     }
 }
 
