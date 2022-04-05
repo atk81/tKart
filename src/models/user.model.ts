@@ -19,7 +19,8 @@ export interface IUser extends Document {
     email: string;
     password: string;
     status?: string;
-    role?: string;
+    role?: string[];
+    roleChangeRequest?: string;
     photo?: {
         id: string;
         secure_url: string;
@@ -69,9 +70,14 @@ const UserSchema = new Schema<IUser>({
         default: "pending"
     },
     role: {
-        type: String,
-        enum: ["user", "admin"],
-        default: "user"
+        type: [{
+            type: String,
+            enum: ["user", "admin", "vendor"]
+        }],
+        default: ["user"]
+    },
+    roleChangeRequest: {
+        type: String
     },
     photo: {
         id: {

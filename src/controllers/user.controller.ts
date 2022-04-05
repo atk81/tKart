@@ -3,6 +3,7 @@ import { NextFunction, Request, Response } from 'express';
 import mongoose from 'mongoose';
 import { Cloudinary } from '../config/cloudinary.config';
 import { Nodemailer } from '../config/nodemailer.config';
+import { logger } from "../logger";
 import User, { IUser } from '../models/user.model';
 import { cookieToken } from '../utils/cookieToken';
 import { CustomError } from '../utils/response/error';
@@ -420,6 +421,95 @@ export const deleteUser = async (req: Request, res: Response, next: NextFunction
         res.customSuccess(200, "User Deleted", user);
     } catch(err){
         const error = new CustomError(500, "Application", "Error occured while deleting user", err);
+        return next(error);
+    }
+}
+
+
+export const upgradeUserRoleRequest = async (req: Request, res: Response, next: NextFunction) => {
+    const userId = req.user?._id;
+    const rolesRequested: string[] = req.body.roles;
+    const validRoles = [];
+    const invalidRoles = [];
+    const userRoles = [];
+    logger.debug(rolesRequested);
+    rolesRequested.forEach(role => {
+        const availableRoles = User.schema.path("role").options.type[0].enum;
+        logger.debug(availableRoles);
+        if(availableRoles.includes(role)) {
+            if(req.user.role.includes(role)) {
+                userRoles.push(role);
+            } else {
+                validRoles.push(role);
+            }
+        } else{
+            invalidRoles.push(role);
+        }
+    });
+    logger.debug(validRoles);
+    const token = crypto.randomBytes(20).toString('hex');
+    await User.findByIdAndUpdate(userId, {roleChangeRequest: token});
+    const url = `${req.protocol}://${req.get('host')}/api/v1/admin/updateRole/${userId}/${token}?roles=${validRoles}`;
+    const approveURL = `${url}&approve=true`;
+    const rejectURL = `${url}&approve=false`;
+
+    // Send email to admin
+    if(validRoles.length > 0){
+        const admin = await User.findOne({ role: "admin" });
+        if(admin) {
+            const nodemailer: Nodemailer = new Nodemailer();
+            await nodemailer.sendUserRequestForRoleChange(admin.name, admin.email, approveURL, rejectURL, req.user, validRoles);
+            logger.debug("Email sent to admin", admin);
+        } else {
+            logger.error("Admin not found");
+        }
+        res.customSuccess(200, "User role request sent", {approveURL, rejectURL, validRoles, invalidRoles, userRoles});
+    } else{
+        res.customSuccess(200, "No valid roles", {validRoles, invalidRoles, userRoles});
+    }
+
+}
+
+export const handleAdminResponseForRoleChange = async (req: Request, res: Response, next: NextFunction) => {
+    const userId = req.params.id;
+    const rolesRequested = String(req.query.roles).split(",");
+    const approve = req.query.approve;
+    const token = req.params.token;
+    if(!userId) {
+        const err = new CustomError(400, "General", "User id is required", null);
+        return next(err);
+    }
+    if(!mongoose.Types.ObjectId.isValid(userId)) {
+        const err = new CustomError(400, "General", "User id is invalid", null);
+        return next(err);
+    }
+    if(rolesRequested.length === 0) {
+        const err = new CustomError(400, "General", "Roles are required", null);
+        return next(err);
+    }
+    try{
+        const nodemailer = new Nodemailer();
+        if(approve === "true") {
+            const user = await User.findOneAndUpdate({_id : userId, roleChangeRequest: token}, { "$push": { "role": { "$each": rolesRequested }}, roleChangeRequest: null}, {new: true});
+            logger.info(user);
+            if(user) {
+                await nodemailer.sendAdminResponseForRoleChange(user.name, user.email, true);
+                res.customSuccess(200, "User role updated", user);
+            } else{
+                res.customSuccess(200, "User role not updated, already approve rejected by our admins", user);
+            }
+        } else {
+            const user = await User.findOneAndUpdate({_id : userId, roleChangeRequest: token}, {roleChangeRequest: null}, {new: true});
+            logger.info(user);
+            if(user) {
+                await nodemailer.sendAdminResponseForRoleChange(user.name, user.email, false);
+                res.customSuccess(200, "User role update rejected", null);
+            } else {
+                res.customSuccess(200, "User role Already updated", null);
+            }
+        }
+    } catch(err){
+        const error = new CustomError(500, "Application", "Error occured while updating user role", err);
         return next(error);
     }
 }

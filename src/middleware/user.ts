@@ -30,7 +30,7 @@ class UserMiddleware {
 
     public customRoles(...roles: string[]) {
         return (req: Request, res: Response, next: NextFunction) => {
-            if(!roles.includes(req.user.role)) {
+            if(!roles.some(role => req.user.role.includes(role))) {
                 const err = new CustomError(403, "General", "You don't have permission to access this resource",null);
                 return next(err);
             }
