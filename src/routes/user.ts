@@ -1,5 +1,7 @@
 import { Router } from "express";
-import { signup, signupVerify, login, logout, forgotPassword, resetPasswordByToken, dashboard, changePassword, updateProfile, allUsers, user, updateProfileByAdmin, deleteUser, upgradeUserRoleRequest, handleAdminResponseForRoleChange } from "../controllers/user.controller";
+import { signup, signupVerify, login, logout, forgotPassword, resetPasswordByToken, dashboard, 
+    changePassword, updateProfile, allUsers, user, updateProfileByAdmin, deleteUser, upgradeUserRoleRequest,
+    handleAdminResponseForRoleChange, allAdmins } from "../controllers/user.controller";
 import {BigPromise} from "../middleware/bigPromise";
 import UserMiddleware from "../middleware/user";
 const app = Router();
@@ -20,6 +22,6 @@ app.put("/admin/user/:id",UserMiddleware.isLoggedIn, UserMiddleware.customRoles(
 app.delete("/admin/user/:id",UserMiddleware.isLoggedIn, UserMiddleware.customRoles("admin"), BigPromise(deleteUser));
 app.post("/user/upgradeUserRoleRequest", UserMiddleware.isLoggedIn, BigPromise(upgradeUserRoleRequest));
 app.get("/admin/updateRole/:id/:token", UserMiddleware.isLoggedIn, UserMiddleware.customRoles("admin"), BigPromise(handleAdminResponseForRoleChange));
-
+app.get("/admin/alladmins", UserMiddleware.isLoggedIn, UserMiddleware.customRoles("admin"), BigPromise(allAdmins));
 
 export { app as userRoutes };
