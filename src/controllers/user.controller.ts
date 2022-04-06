@@ -381,8 +381,8 @@ export const updateProfileByAdmin = async (req: Request, res: Response, next: Ne
     }
 
     try{
-        const { name, email, role } = req.body;
-        if(!name || !email || !role) {
+        const { name, email } = req.body;
+        if(!name || !email ) {
             const err = new CustomError(400, "General", "name, email and role are required", null);
             return next(err);
         }
@@ -390,8 +390,7 @@ export const updateProfileByAdmin = async (req: Request, res: Response, next: Ne
             _id: userId,
         }, {
             name,
-            email,
-            role
+            email
         }, {
             new: true,
             runValidators: true
@@ -415,10 +414,17 @@ export const deleteUser = async (req: Request, res: Response, next: NextFunction
     }
 
     try{
-        const user = await User.findOneAndDelete({
-            _id: userId,
-        });
-        res.customSuccess(200, "User Deleted", user);
+        const user = await User.findById(userId);
+        if(!user) {
+            const err = new CustomError(400, "General", "User not found", null);
+            return next(err);
+        }
+        if(user.role.includes("admin")) {
+            const err = new CustomError(400, "General", "Cannot delete admin", null);
+            return next(err);
+        }
+        await user.remove();
+        res.customSuccess(200, "User deleted", null);
     } catch(err){
         const error = new CustomError(500, "Application", "Error occured while deleting user", err);
         return next(error);
@@ -510,6 +516,16 @@ export const handleAdminResponseForRoleChange = async (req: Request, res: Respon
         }
     } catch(err){
         const error = new CustomError(500, "Application", "Error occured while updating user role", err);
+        return next(error);
+    }
+}
+
+export const allAdmins = async (req: Request, res: Response, next: NextFunction) => {
+    try{
+        const users = await User.find({role: "admin"});
+        res.customSuccess(200, "All admin", users);
+    } catch(err){
+        const error = new CustomError(500, "Application", "Error occured while fetching all admin", err);
         return next(error);
     }
 }
