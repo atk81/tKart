@@ -10,6 +10,7 @@ export interface IProduct extends Document {
     }[],
     category: string;
     brand: string;
+    numberofreviews?: number;
     rating?: number;
     reviews?: string[];
     productOwner: string;
