@@ -77,6 +77,10 @@ export class Cloudinary{
     public async uploadProductPhotos(files){
         // Iterate through the files and upload them to cloudinary.
         // Return the result of each upload.
+        // If there is only one file, gives an error. - Fixed.
+        if(!(files.photos instanceof Array)){
+            files.photos = [files.photos];
+        }
         const promises = [];
         logger.debug(files.photos);
         for(const file of files.photos){
@@ -86,4 +90,16 @@ export class Cloudinary{
         }
         return await Promise.all(promises);
     }
+
+    public async deleteProudctPhoto(photoId){
+        return await this.cloudinary.uploader.destroy(photoId, (err, result) => {
+            if(err){
+                logger.error(err);
+                throw new Error(err);
+            }
+            logger.info(result);
+            // Image is deleted from cloudinary.
+        });
+    }
+
 }
