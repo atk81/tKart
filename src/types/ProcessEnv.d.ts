@@ -17,5 +17,10 @@ declare namespace NodeJS{
         SMTP_PORT: string,
         SMTP_USER: string,
         SMTP_PASSWORD: string,
+        STRIPE_API_KEY: string,
+        STRIPE_SECRET_KEY: string,
+        STRIPE_API_VERSION: string,
+        RAZORPAY_API_KEY: string,
+        RAZORPAY_SECRET_KEY: string,
     }
 }
