@@ -149,7 +149,6 @@ export const createOrder = async (req: Request, res: Response, next: NextFunctio
             user: updatedUser,
         });
     } catch(err){
-        console.log(err);
         return next(new CustomError(500, "General", "Error while creating order, Retry",err));
     }
 }
