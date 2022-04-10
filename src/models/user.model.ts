@@ -2,11 +2,12 @@ import bcrypt from "bcryptjs";
 import crypto from "crypto";
 import fs from "fs";
 import jwt from "jsonwebtoken";
-import { Document, model, Schema } from "mongoose";
+import mongoose, { Document, model, Schema } from "mongoose";
 import path from "path";
 import validator from "validator";
 import { JWTPayload } from "../types/jwt";
 import { CustomError } from "../utils/response/error";
+import { IAddress, AddressSchema } from "./address.model";
 
 const pathToPrivateKey = path.join(__dirname, '..', '..', '.private.key');
 const privateKey = fs.readFileSync(pathToPrivateKey, 'utf8');
@@ -29,6 +30,8 @@ export interface IUser extends Document {
     confirmUserExpires?: Date;
     forgetPasswordToken?: string;
     forgetPasswordExpires?: Date;
+    cart?: {items: [{product: mongoose.Types.ObjectId, quantity: number}], total: number};
+    addresses?: [IAddress];
     createdAt: Date;
     isValidPassword(password: string): Promise<boolean>;
     getJWTToken(): string;
@@ -99,6 +102,24 @@ const UserSchema = new Schema<IUser>({
     forgetPasswordExpires: {
         type: Date,
     },
+    cart: {
+        items: [{
+            product: {
+                type: Schema.Types.ObjectId,
+                ref: "Product",
+            },
+            quantity: {
+                type: Number,
+                required: [true, "Quantity is required"],
+                min: [1, "Quantity must be at least 1"],
+            }
+        }],
+        total: {
+            type: Number,
+            default: 0,
+        }
+    },
+    addresses: [AddressSchema],
     createdAt: {
         type: Date,
         default: Date.now

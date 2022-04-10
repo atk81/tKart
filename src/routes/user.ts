@@ -1,8 +1,7 @@
 import { Router } from "express";
-import { signup, signupVerify, login, logout, forgotPassword, resetPasswordByToken, dashboard, 
-    changePassword, updateProfile, allUsers, user, updateProfileByAdmin, deleteUser, upgradeUserRoleRequest,
-    handleAdminResponseForRoleChange, allAdmins } from "../controllers/user.controller";
-import {BigPromise} from "../middleware/bigPromise";
+import { addAddress, deleteAddress, updateAddress } from "../controllers/address.controller";
+import { allAdmins, allUsers, changePassword, dashboard, deleteUser, forgotPassword, handleAdminResponseForRoleChange, login, logout, resetPasswordByToken, signup, signupVerify, updateProfile, updateProfileByAdmin, upgradeUserRoleRequest, user } from "../controllers/user.controller";
+import { BigPromise } from "../middleware/bigPromise";
 import UserMiddleware from "../middleware/user";
 const app = Router();
 
@@ -21,7 +20,11 @@ app.get("/admin/user/:id",UserMiddleware.isLoggedIn, UserMiddleware.customRoles(
 app.put("/admin/user/:id",UserMiddleware.isLoggedIn, UserMiddleware.customRoles("admin"), BigPromise(updateProfileByAdmin));
 app.delete("/admin/user/:id",UserMiddleware.isLoggedIn, UserMiddleware.customRoles("admin"), BigPromise(deleteUser));
 app.post("/user/upgradeUserRoleRequest", UserMiddleware.isLoggedIn, BigPromise(upgradeUserRoleRequest));
-app.get("/admin/updateRole/:id/:token", UserMiddleware.isLoggedIn, UserMiddleware.customRoles("admin"), BigPromise(handleAdminResponseForRoleChange));
+app.get("/admin/updateRole/:id/:token", BigPromise(handleAdminResponseForRoleChange));
 app.get("/admin/alladmins", UserMiddleware.isLoggedIn, UserMiddleware.customRoles("admin"), BigPromise(allAdmins));
+
+app.post("/user/addAddress", UserMiddleware.isLoggedIn, BigPromise(addAddress));
+app.put("/user/updateAddress/:id", UserMiddleware.isLoggedIn, BigPromise(updateAddress));
+app.delete("/user/deleteAddress/:id", UserMiddleware.isLoggedIn, BigPromise(deleteAddress));
 
 export { app as userRoutes };
