@@ -3,7 +3,7 @@ import { IAddress, AddressSchema } from "./address.model";
 
 export interface IOrder extends Document{
     user: Schema.Types.ObjectId;
-    products: [{
+    products: {items:[{
         product: Schema.Types.ObjectId;
         name: string;
         price: number;
@@ -13,7 +13,7 @@ export interface IOrder extends Document{
         deliveryStatus?: boolean,
         deliveryDate?: Date,
         deliveryAddress?: IAddress,
-    }];
+    }]};
     total: number;
     payment: string;
     createdAt: Date;

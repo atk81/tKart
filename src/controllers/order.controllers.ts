@@ -157,3 +157,98 @@ export const createOrder = async (req: Request, res: Response, next: NextFunctio
         return next(new CustomError(500, "General", "Error while creating order, Retry",err));
     }
 }
+
+export const getOrders = async (req: Request, res: Response, next: NextFunction) => {
+    const userId = req.user.id;
+    try{
+        const orders = await Order.find({user: userId});
+        if (!orders) {
+            return next(new CustomError(404, "General", "Orders not found",null));
+        }
+        return res.customSuccess(200, "Orders retrieved successfully", orders);
+    }
+    catch(err){
+        return next(new CustomError(500, "General", "Error while retrieving orders, Retry",err));
+    }
+}
+
+export const cancelOrder = async (req: Request, res: Response, next: NextFunction) => {
+    const userId = req.user.id;
+    const orderId = req.params.id;
+    /*  
+        req.body: { 
+            products: [{
+                product: "5e9f8f8f8f8f8f8f8f8f8f8",
+            }, {
+                product: "5e9f8f8f8f8f8f8f8f8f8f9",
+            }] 
+    */
+    const { products } = req.body;
+    try{
+        const order = await Order.findById(orderId);
+        if (!order) {
+            return next(new CustomError(404, "General", "Order not found",null));
+        }
+        if (order.user.toString() !== userId) {
+            return next(new CustomError(401, "General", "User is not authorized to cancel this order",null));
+        }
+        // order.status = "cancelled";
+        for(const product in products) {
+            const productId = product;
+            for(let index = 0; index < order.products.items.length; index++) {
+                if (order.products.items[index].product.toString() === productId) {
+                    order.products.items[index].orderStatus = "cancelled";
+                    // TODO: Start for refund...
+                }
+            }
+        }
+        const updatedOrder = await order.save();
+        return res.customSuccess(200, "Order cancelled successfully", updatedOrder);
+    }
+    catch(err){
+        return next(new CustomError(500, "General", "Error while cancelling order, Retry",err));
+    }
+}
+
+export const getOrder = async (req: Request, res: Response, next: NextFunction) => {
+    const userId = req.user.id;
+    const orderId = req.params.id;
+    try{
+        const order = await Order.findOne({user: userId, _id: orderId});
+        if (!order) {
+            return next(new CustomError(404, "General", "Order not found",null));
+        }
+        return res.customSuccess(200, "Order retrieved successfully", order);
+    }
+    catch(err){
+        return next(new CustomError(500, "General", "Error while retrieving order, Retry",err));
+    }
+}
+
+export const getAllOrders = async (req: Request, res: Response, next: NextFunction) => {
+    try{
+        const orders = await Order.find();
+        if (!orders) {
+            return next(new CustomError(404, "General", "Orders not found",null));
+        }
+        return res.customSuccess(200, "Orders retrieved successfully", orders);
+    }
+    catch(err){
+        return next(new CustomError(500, "General", "Error while retrieving orders, Retry",err));
+    }
+}
+
+export const getOrderByAdmin = async (req: Request, res: Response, next: NextFunction) => {
+    const orderId = req.params.id;
+    try{
+        const order = await Order.findById(orderId);
+        if (!order) {
+            return next(new CustomError(404, "General", "Order not found",null));
+        }
+        return res.customSuccess(200, "Order retrieved successfully", order);
+    }
+    catch(err){
+        return next(new CustomError(500, "General", "Error while retrieving order, Retry",err));
+    }
+}
+
