@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import mongoose from "mongoose";
+import { logger } from "../logger";
 import { IAddress } from "../models/address.model";
 import Order from "../models/order.model";
 import Product, { IProduct } from "../models/product.model";
@@ -135,12 +136,15 @@ export const createOrder = async (req: Request, res: Response, next: NextFunctio
             });
         }
         // !Bug: Products are not saving into the order Schema.
-        const newOrder = await Order.create({
+        const order = new Order({
             user: userId,
-            products: productsInOrder,
+            products: {
+                items: productsInOrder,
+            },
             total: convertIntoDoubleDecimal(cartTotal),
             payment: payment_id,
         });
+        const newOrder = await order.save();
         // On Success, clear the cart
         user.cart = {} as any;
         const updatedUser = await user.save();
@@ -149,6 +153,7 @@ export const createOrder = async (req: Request, res: Response, next: NextFunctio
             user: updatedUser,
         });
     } catch(err){
+        logger.error(err);
         return next(new CustomError(500, "General", "Error while creating order, Retry",err));
     }
 }
