@@ -1,0 +1,3941 @@
+{
+	"info": {
+		"_postman_id": "5a06aae9-a025-4a02-9c26-d403f789cddc",
+		"name": "tKart",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Singup - Unauthorized",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "ashutosh",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "{{Test Password}}",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "test4@test.com",
+									"type": "text"
+								},
+								{
+									"key": "photo",
+									"type": "file",
+									"src": "/Users/atk81/Downloads/WhatsApp Image 2022-02-08 at 9.12.09 AM.jpeg",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{DOMAIN}}/signup",
+							"host": [
+								"{{DOMAIN}}"
+							],
+							"path": [
+								"signup"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Singup - Unauthorized",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "ashutosh",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "{{Test Password}}",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "test4@test.com",
+											"type": "text"
+										},
+										{
+											"key": "photo",
+											"type": "file",
+											"src": "/Users/atk81/Downloads/WhatsApp Image 2022-02-08 at 9.12.09 AM.jpeg",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{DOMAIN}}/signup",
+									"host": [
+										"{{DOMAIN}}"
+									],
+									"path": [
+										"signup"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "360"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"168-tZbtHYhi/xMyvRmerYDe5on9AVk\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Apr 2022 17:14:55 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User Created Successfully, Mail is send to user mail, please verify before login\",\n    \"data\": {\n        \"user\": {\n            \"name\": \"ashutosh\",\n            \"email\": \"test4@test.com\",\n            \"status\": \"pending\",\n            \"role\": \"user\",\n            \"_id\": \"6248848a771f0ce9326b232f\",\n            \"createdAt\": \"2022-04-02T17:14:50.158Z\",\n            \"__v\": 0\n        },\n        \"url\": \"http://localhost:3000/api/v1/signup/verify/2fa03daa4bc4d5d8f9666a63f15036587277fc59\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Signup/Verify - Unauthorized",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{DOMAIN}}/signup/verify/2fa03daa4bc4d5d8f9666a63f15036587277fc59",
+							"host": [
+								"{{DOMAIN}}"
+							],
+							"path": [
+								"signup",
+								"verify",
+								"2fa03daa4bc4d5d8f9666a63f15036587277fc59"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Signup/Verify - Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{DOMAIN}}/signup/verify/2fa03daa4bc4d5d8f9666a63f15036587277fc59",
+									"host": [
+										"{{DOMAIN}}"
+									],
+									"path": [
+										"signup",
+										"verify",
+										"2fa03daa4bc4d5d8f9666a63f15036587277fc59"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "263"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"107-S8A+ajSrvUyNlD9GAaXaDeGaUvM\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Apr 2022 17:16:19 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User verified successfully\",\n    \"data\": {\n        \"user\": {\n            \"_id\": \"6248848a771f0ce9326b232f\",\n            \"name\": \"ashutosh\",\n            \"email\": \"test4@test.com\",\n            \"status\": \"active\",\n            \"role\": \"user\",\n            \"confirmUserToken\": null,\n            \"confirmUserExpires\": null,\n            \"createdAt\": \"2022-04-02T17:14:50.158Z\",\n            \"__v\": 0\n        }\n    }\n}"
+						},
+						{
+							"name": "Signup/Verify - Invalid token/User already verified",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{DOMAIN}}/signup/verify/2fa03daa4bc4d5d8f9666a63f15036587277fc59",
+									"host": [
+										"{{DOMAIN}}"
+									],
+									"path": [
+										"signup",
+										"verify",
+										"2fa03daa4bc4d5d8f9666a63f15036587277fc59"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "61"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3d-CIcjWyivUKgsxqQchEzMzfkaoDY\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Apr 2022 17:20:44 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User verified successfully\",\n    \"data\": {\n        \"user\": null\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Login - Unauthorized",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"test3@test.com\",\n    \"password\": \"Test@123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DOMAIN}}/login",
+							"host": [
+								"{{DOMAIN}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login - Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"test4@test.com\",\n    \"password\": \"Test@1234\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DOMAIN}}/login",
+									"host": [
+										"{{DOMAIN}}"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MjQ4ODQ4YTc3MWYwY2U5MzI2YjIzMmYiLCJpYXQiOjE2NDg5MTk4MzkxNDMsImV4cCI6MTY0ODkyMDA5ODM0M30.Kom7uRXJs0O4cPPz8g8PF4qek2mLy3RHJBt31Q5uetEKyrVsltJ1nJ_ARXSOgIw65_iR0EN2_Xa6CV4paqLRdVW4D92BsW83Rk8FZeQ6paalboGuZ0K2UD7CjjiVXrXcoYZWtqySwPXkyT82idwmZztSqqt9CmLNPw6mr6LEfB8JtROZYyaH8aMomnCm14o8qSBlUQtsODCvZhBolPawntuUlIpkxqAQNhWYcd_UmOGvxspOlD7KLV8aSxb_pI1Odc0ZDX6-ZM9K-8ddmR88-ymPrA1sVbxy6J4IoUgG0aU2yYt1tJUH7iiE1bNEvXDihYFd6u87OPJGOAmi7dDygGRh7kpuOv4pSwThdOyVkLNaQQBCqTYL0ea3QX_jumxMIJyCwb_oeR685MXVdUvHhICpI5In78XrnIAqfhxqr6o7usscqY90AZP-l_BV4Zh6-lGfP_21CN2ocjliIHxmYKPHCrElZoz0e9A4a7C-pOP3qYvSVfRc0p5D6681CQNwOgB5zZn5ek0iP_bRAU1NwiIqSPRVt77oSIxP1IUrpL3-hqZeed5EouE2Nlqkw6TDVfCOEgYDbq7Kh9UKlD_sO3BvalQwyIWien_bkRnrcX3-DIFUybUpBvHyCtE0uxB08NkDJsFrDcFyBe-N7D00F-KLwAJ8Xi-xDvBoUMm6EY0; Path=/; Expires=Invalid Date; HttpOnly"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1134"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"46e-ieYwXy9PBHVMs1cHHWlD8SWCC7M\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Apr 2022 17:17:19 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success\",\n    \"data\": {\n        \"token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MjQ4ODQ4YTc3MWYwY2U5MzI2YjIzMmYiLCJpYXQiOjE2NDg5MTk4MzkxNDMsImV4cCI6MTY0ODkyMDA5ODM0M30.Kom7uRXJs0O4cPPz8g8PF4qek2mLy3RHJBt31Q5uetEKyrVsltJ1nJ_ARXSOgIw65_iR0EN2_Xa6CV4paqLRdVW4D92BsW83Rk8FZeQ6paalboGuZ0K2UD7CjjiVXrXcoYZWtqySwPXkyT82idwmZztSqqt9CmLNPw6mr6LEfB8JtROZYyaH8aMomnCm14o8qSBlUQtsODCvZhBolPawntuUlIpkxqAQNhWYcd_UmOGvxspOlD7KLV8aSxb_pI1Odc0ZDX6-ZM9K-8ddmR88-ymPrA1sVbxy6J4IoUgG0aU2yYt1tJUH7iiE1bNEvXDihYFd6u87OPJGOAmi7dDygGRh7kpuOv4pSwThdOyVkLNaQQBCqTYL0ea3QX_jumxMIJyCwb_oeR685MXVdUvHhICpI5In78XrnIAqfhxqr6o7usscqY90AZP-l_BV4Zh6-lGfP_21CN2ocjliIHxmYKPHCrElZoz0e9A4a7C-pOP3qYvSVfRc0p5D6681CQNwOgB5zZn5ek0iP_bRAU1NwiIqSPRVt77oSIxP1IUrpL3-hqZeed5EouE2Nlqkw6TDVfCOEgYDbq7Kh9UKlD_sO3BvalQwyIWien_bkRnrcX3-DIFUybUpBvHyCtE0uxB08NkDJsFrDcFyBe-N7D00F-KLwAJ8Xi-xDvBoUMm6EY0\",\n        \"options\": {\n            \"expires\": null,\n            \"httpOnly\": true\n        },\n        \"user\": {\n            \"_id\": \"6248848a771f0ce9326b232f\",\n            \"name\": \"ashutosh\",\n            \"email\": \"test4@test.com\",\n            \"password\": null,\n            \"status\": \"active\",\n            \"role\": \"user\",\n            \"confirmUserToken\": null,\n            \"confirmUserExpires\": null,\n            \"createdAt\": \"2022-04-02T17:14:50.158Z\",\n            \"__v\": 0\n        }\n    }\n}"
+						},
+						{
+							"name": "Login - Incorrect Password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"test4@test.com\",\n    \"password\": \"Test@123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DOMAIN}}/login",
+									"host": [
+										"{{DOMAIN}}"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "87"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"57-qKZWT36N/fs9ZRAscC+DH/6McKs\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Apr 2022 17:19:17 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"httpStatusCode\": 400,\n    \"type\": \"General\",\n    \"message\": \"Password is incorrect\",\n    \"errors\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "Logout - Authorized",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"ashutoshkushwaha81.dev@gmail.com\",\n    \"password\": \"Test@1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DOMAIN}}/logout",
+							"host": [
+								"{{DOMAIN}}"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Logout - Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"ashutoshkushwaha81.dev@gmail.com\",\n    \"password\": \"Test@1234\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DOMAIN}}/logout",
+									"host": [
+										"{{DOMAIN}}"
+									],
+									"path": [
+										"logout"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2b-+KRPpEwaHdbksLf2EPlZzS4ITYc\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Apr 2022 17:32:21 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Logout successful\",\n    \"data\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "ForgotPassword - Unauthorized",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"test4@test.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DOMAIN}}/forgotPassword",
+							"host": [
+								"{{DOMAIN}}"
+							],
+							"path": [
+								"forgotPassword"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "ForgotPassword - Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"test1@test.com\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DOMAIN}}/forgotPassword",
+									"host": [
+										"{{DOMAIN}}"
+									],
+									"path": [
+										"forgotPassword"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "133"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"85-Z9IPbvocwDTF13S8we4egX9IKXI\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Apr 2022 17:35:11 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Email sent\",\n    \"data\": {\n        \"url\": \"http://localhost:3000/api/v1/forgotPassword/verify/5b7c964747b8120245b542e4a1050ea8978b6e19\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "ResetPasswordByToken - Unauthorized",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"password\": \"Test@123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/forgotPassword/verify/5b7c964747b8120245b542e4a1050ea8978b6e19",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"forgotPassword",
+								"verify",
+								"5b7c964747b8120245b542e4a1050ea8978b6e19"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "ResetPasswordByToken - Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"password\": \"Test@123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1/forgotPassword/verify/5b7c964747b8120245b542e4a1050ea8978b6e19",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"forgotPassword",
+										"verify",
+										"5b7c964747b8120245b542e4a1050ea8978b6e19"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "42"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2a-zkyfRNcXXqNkMJS5eZSURY1WI2k\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Apr 2022 17:35:50 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Password updated\",\n    \"data\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "User Dashboard - Authorized",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{DOMAIN}}/userdashboard",
+							"host": [
+								"{{DOMAIN}}"
+							],
+							"path": [
+								"userdashboard"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "User Dashboard - Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{DOMAIN}}/userdashboard",
+									"host": [
+										"{{DOMAIN}}"
+									],
+									"path": [
+										"userdashboard"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "260"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"104-98aJ3oxscnKXtSj9tIXhUhnsQ0k\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Apr 2022 17:21:59 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Hello ashutosh, You are loggedIn\",\n    \"data\": {\n        \"_id\": \"6248848a771f0ce9326b232f\",\n        \"name\": \"ashutosh\",\n        \"email\": \"test4@test.com\",\n        \"status\": \"active\",\n        \"role\": \"user\",\n        \"confirmUserToken\": null,\n        \"confirmUserExpires\": null,\n        \"createdAt\": \"2022-04-02T17:14:50.158Z\",\n        \"__v\": 0\n    }\n}"
+						},
+						{
+							"name": "User Dashboard - Fetch without login",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{DOMAIN}}/userdashboard",
+									"host": [
+										"{{DOMAIN}}"
+									],
+									"path": [
+										"userdashboard"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "36"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"24-0TgWzTdzmtXEpUmtv1ac+ejOX6Y\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Apr 2022 17:32:52 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Unauthorized\",\n    \"data\": {}\n}"
+						}
+					]
+				},
+				{
+					"name": "ChangePassword - Authorized",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"oldPassword\": \"Test@1234\",\n    \"newPassword\": \"Test@123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DOMAIN}}/changePassword",
+							"host": [
+								"{{DOMAIN}}"
+							],
+							"path": [
+								"changePassword"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "ChangePassword - Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"oldPassword\": \"Test@1234\",\n    \"newPassword\": \"Test@123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DOMAIN}}/changePassword",
+									"host": [
+										"{{DOMAIN}}"
+									],
+									"path": [
+										"changePassword"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "42"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2a-zkyfRNcXXqNkMJS5eZSURY1WI2k\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Apr 2022 17:24:46 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Password updated\",\n    \"data\": null\n}"
+						},
+						{
+							"name": "ChangePassword - Old Password is incorrect",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"oldPassword\": \"Test@1234\",\n    \"newPassword\": \"Test@123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DOMAIN}}/changePassword",
+									"host": [
+										"{{DOMAIN}}"
+									],
+									"path": [
+										"changePassword"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "90"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"5a-wlAUsLtVWvewdXSxVi4G9fhpVJ0\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Apr 2022 17:25:23 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"httpStatusCode\": 400,\n    \"type\": \"General\",\n    \"message\": \"oldPassword is incorrect\",\n    \"errors\": null\n}"
+						},
+						{
+							"name": "ChangePassword - Unauthorized",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"oldPassword\": \"Test@123\",\n    \"newPassword\": \"test@123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DOMAIN}}/changePassword",
+									"host": [
+										"{{DOMAIN}}"
+									],
+									"path": [
+										"changePassword"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "36"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"24-0TgWzTdzmtXEpUmtv1ac+ejOX6Y\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Apr 2022 17:33:25 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Unauthorized\",\n    \"data\": {}\n}"
+						}
+					]
+				},
+				{
+					"name": "Update User Dashboard",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "test4@test.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Changehogaya",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": "ashutosh",
+									"type": "text"
+								},
+								{
+									"key": "photo",
+									"type": "file",
+									"src": "/Users/atk81/Downloads/gamer.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{DOMAIN}}/userdashboard/update",
+							"host": [
+								"{{DOMAIN}}"
+							],
+							"path": [
+								"userdashboard",
+								"update"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "randomvalue",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update User Dashboard - success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "test4@test.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "Changehogaya",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "name",
+											"value": "ashutosh",
+											"type": "text"
+										},
+										{
+											"key": "photo",
+											"type": "file",
+											"src": "/Users/atk81/Downloads/gamer.png"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{DOMAIN}}/userdashboard/update",
+									"host": [
+										"{{DOMAIN}}"
+									],
+									"path": [
+										"userdashboard",
+										"update"
+									],
+									"query": [
+										{
+											"key": "email",
+											"value": "randomvalue",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "126"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"7e-kExabKWP+xvW/DyOZaRaC0EbBcU\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Apr 2022 17:30:45 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User updated\",\n    \"data\": {\n        \"acknowledged\": true,\n        \"modifiedCount\": 1,\n        \"upsertedId\": null,\n        \"upsertedCount\": 0,\n        \"matchedCount\": 1\n    }\n}"
+						},
+						{
+							"name": "Update User Dashboard - Error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "test4@test.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "Changehogaya",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "name",
+											"value": "ashutosh",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "photo",
+											"type": "file",
+											"src": "/Users/atk81/Downloads/gamer.png"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{DOMAIN}}/userdashboard/update",
+									"host": [
+										"{{DOMAIN}}"
+									],
+									"path": [
+										"userdashboard",
+										"update"
+									],
+									"query": [
+										{
+											"key": "email",
+											"value": "randomvalue",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "93"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"5d-4iGlcdfG/KAzTweYVLjnG1hpl/M\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Apr 2022 17:31:41 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"httpStatusCode\": 400,\n    \"type\": \"General\",\n    \"message\": \"name and email are required\",\n    \"errors\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "Update User Role",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"roles\": [\"admin\", \"Vendor\", \"user\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DOMAIN}}/user/upgradeUserRoleRequest",
+							"host": [
+								"{{DOMAIN}}"
+							],
+							"path": [
+								"user",
+								"upgradeUserRoleRequest"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update User Role",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"roles\": [\"admin\", \"Vendor\", \"user\"]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DOMAIN}}/user/upgradeUserRoleRequest",
+									"host": [
+										"{{DOMAIN}}"
+									],
+									"path": [
+										"user",
+										"upgradeUserRoleRequest"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "337"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"151-nl2dEPsb5waDh7fsDdoyA9UzsCU\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 05 Apr 2022 04:47:14 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User role request sent\",\n    \"data\": {\n        \"approveURL\": \"http://localhost:3000/api/v1/admin/updateRole/624b090584fe1d7ef075f2d9?roles=admin&approve=true\",\n        \"rejectURL\": \"http://localhost:3000/api/v1/admin/updateRole/624b090584fe1d7ef075f2d9?roles=admin&approve=false\",\n        \"validRoles\": [\n            \"admin\"\n        ],\n        \"invalidRoles\": [\n            \"Vendor\"\n        ],\n        \"userRoles\": [\n            \"user\"\n        ]\n    }\n}"
+						},
+						{
+							"name": "Invalid User Roles",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"roles\": [\"Admin\", \"Vendor\", \"user\"]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DOMAIN}}/user/upgradeUserRoleRequest",
+									"host": [
+										"{{DOMAIN}}"
+									],
+									"path": [
+										"user",
+										"upgradeUserRoleRequest"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "108"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"6c-ZnG6eSlDrYWzxByr/u49u6oFKhQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 05 Apr 2022 04:49:11 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"No valid roles\",\n    \"data\": {\n        \"validRoles\": [],\n        \"invalidRoles\": [\n            \"Admin\",\n            \"Vendor\"\n        ],\n        \"userRoles\": [\n            \"user\"\n        ]\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "All Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{DOMAIN}}/admin/allusers",
+							"host": [
+								"{{DOMAIN}}"
+							],
+							"path": [
+								"admin",
+								"allusers"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "All Users",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{DOMAIN}}/admin/allusers",
+									"host": [
+										"{{DOMAIN}}"
+									],
+									"path": [
+										"admin",
+										"allusers"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "912"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"390-5tu+4fYY7pBYRcReUE95ep7TWzo\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 03 Apr 2022 04:49:22 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Users found\",\n    \"data\": [\n        {\n            \"_id\": \"62481e1454449370c453198e\",\n            \"name\": \"ashutosh\",\n            \"email\": \"test1@test.com\",\n            \"status\": \"active\",\n            \"role\": \"user\",\n            \"confirmUserToken\": null,\n            \"confirmUserExpires\": null,\n            \"createdAt\": \"2022-04-02T09:57:40.371Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"62481f9ba2b38af5163ed4d4\",\n            \"name\": \"ashutosh\",\n            \"email\": \"test@test.com\",\n            \"status\": \"active\",\n            \"role\": \"user\",\n            \"confirmUserToken\": null,\n            \"confirmUserExpires\": null,\n            \"createdAt\": \"2022-04-02T10:04:11.507Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"624858b6cf6f5e642430577d\",\n            \"name\": \"ashutosh\",\n            \"email\": \"test2@test.com\",\n            \"status\": \"active\",\n            \"role\": \"user\",\n            \"confirmUserToken\": null,\n            \"confirmUserExpires\": null,\n            \"createdAt\": \"2022-04-02T14:07:50.844Z\",\n            \"__v\": 0\n        },\n        {\n            \"photo\": {\n                \"id\": \"tKart/Users/fkt9orxqv2tku8e1l4sg\"\n            },\n            \"_id\": \"6248848a771f0ce9326b232f\",\n            \"name\": \"ashutosh\",\n            \"email\": \"test4@test.com\",\n            \"status\": \"active\",\n            \"role\": \"admin\",\n            \"confirmUserToken\": null,\n            \"confirmUserExpires\": null,\n            \"createdAt\": \"2022-04-02T17:14:50.158Z\",\n            \"__v\": 0\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{DOMAIN}}/admin/user/62481e1454449370c453198e",
+							"host": [
+								"{{DOMAIN}}"
+							],
+							"path": [
+								"admin",
+								"user",
+								"62481e1454449370c453198e"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "User - user found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{DOMAIN}}/admin/user/62481e1454449370c453198e",
+									"host": [
+										"{{DOMAIN}}"
+									],
+									"path": [
+										"admin",
+										"user",
+										"62481e1454449370c453198e"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "238"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"ee-7I96mqeHFJ4eOzUGkc+9Nna6KC4\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 03 Apr 2022 05:03:11 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User found\",\n    \"data\": {\n        \"_id\": \"62481e1454449370c453198e\",\n        \"name\": \"ashutosh\",\n        \"email\": \"test1@test.com\",\n        \"status\": \"active\",\n        \"role\": \"user\",\n        \"confirmUserToken\": null,\n        \"confirmUserExpires\": null,\n        \"createdAt\": \"2022-04-02T09:57:40.371Z\",\n        \"__v\": 0\n    }\n}"
+						},
+						{
+							"name": "User - user not found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{DOMAIN}}/admin/user/62481e1454449370c453198a",
+									"host": [
+										"{{DOMAIN}}"
+									],
+									"path": [
+										"admin",
+										"user",
+										"62481e1454449370c453198a"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "80"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"50-QDUnCEAWjXrIwSb+VPaxmMYgn6E\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 03 Apr 2022 05:04:20 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"httpStatusCode\": 400,\n    \"type\": \"General\",\n    \"message\": \"User not found\",\n    \"errors\": null\n}"
+						},
+						{
+							"name": "User - invalid user id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{DOMAIN}}/admin/user/62481e1454449370c453198",
+									"host": [
+										"{{DOMAIN}}"
+									],
+									"path": [
+										"admin",
+										"user",
+										"62481e1454449370c453198"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "84"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"54-/EY4BoCHeZOToTKuhLDKC/er8jI\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 03 Apr 2022 05:08:25 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"httpStatusCode\": 400,\n    \"type\": \"General\",\n    \"message\": \"User id is invalid\",\n    \"errors\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "User - update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"test1@test.com\",\n    \"name\": \"Ashutosh\",\n    \"role\": \"admin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DOMAIN}}/admin/user/62481e1454449370c453198e",
+							"host": [
+								"{{DOMAIN}}"
+							],
+							"path": [
+								"admin",
+								"user",
+								"62481e1454449370c453198e"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "User - update Incomplete infromation passed.",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{DOMAIN}}/admin/user/62481e1454449370c453198e",
+									"host": [
+										"{{DOMAIN}}"
+									],
+									"path": [
+										"admin",
+										"user",
+										"62481e1454449370c453198e"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "99"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"63-5DdNHMpQTM9pkRLHVzZZ+3JtNrE\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 03 Apr 2022 05:30:30 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"httpStatusCode\": 400,\n    \"type\": \"General\",\n    \"message\": \"name, email and role are required\",\n    \"errors\": null\n}"
+						},
+						{
+							"name": "User - updated",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"test1@test.com\",\n    \"name\": \"Ashutosh\",\n    \"role\": \"admin\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DOMAIN}}/admin/user/62481e1454449370c453198e",
+									"host": [
+										"{{DOMAIN}}"
+									],
+									"path": [
+										"admin",
+										"user",
+										"62481e1454449370c453198e"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "241"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"f1-CDZUMQ4kx4Z+BerX/0npuWvtogY\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 03 Apr 2022 05:32:13 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User updated\",\n    \"data\": {\n        \"_id\": \"62481e1454449370c453198e\",\n        \"name\": \"Ashutosh\",\n        \"email\": \"test1@test.com\",\n        \"status\": \"active\",\n        \"role\": \"admin\",\n        \"confirmUserToken\": null,\n        \"confirmUserExpires\": null,\n        \"createdAt\": \"2022-04-02T09:57:40.371Z\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "User - Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{DOMAIN}}/admin/user/62481e1454449370c453198e",
+							"host": [
+								"{{DOMAIN}}"
+							],
+							"path": [
+								"admin",
+								"user",
+								"62481e1454449370c453198e"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "User deleted",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{DOMAIN}}/admin/user/62481e1454449370c453198e",
+									"host": [
+										"{{DOMAIN}}"
+									],
+									"path": [
+										"admin",
+										"user",
+										"62481e1454449370c453198e"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "315"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"13b-UIwXQJcFp6y6foJluszlknu2gvY\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 03 Apr 2022 05:35:09 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User Deleted\",\n    \"data\": {\n        \"_id\": \"62481e1454449370c453198e\",\n        \"name\": \"Ashutosh\",\n        \"email\": \"test1@test.com\",\n        \"password\": \"$2a$10$ZYAHY0Dem7NeG6um3R7L9.2aGe319JVqqZbJ1.wvG./GnA6s08JfK\",\n        \"status\": \"active\",\n        \"role\": \"admin\",\n        \"confirmUserToken\": null,\n        \"confirmUserExpires\": null,\n        \"createdAt\": \"2022-04-02T09:57:40.371Z\",\n        \"__v\": 0\n    }\n}"
+						},
+						{
+							"name": "User - Admin Delete",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{DOMAIN}}/admin/user/624b090584fe1d7ef075f2d9",
+									"host": [
+										"{{DOMAIN}}"
+									],
+									"path": [
+										"admin",
+										"user",
+										"624b090584fe1d7ef075f2d9"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "85"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"55-34K86LrO/2jZb5Fj3Js4r+rvbbY\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 06 Apr 2022 06:20:07 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"httpStatusCode\": 400,\n    \"type\": \"General\",\n    \"message\": \"Cannot delete admin\",\n    \"errors\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "Approve/Reject User Role Change",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{DOMAIN}}/admin/updateRole/624b090584fe1d7ef075f2d9?roles=admin,vendor&approve=true",
+							"host": [
+								"{{DOMAIN}}"
+							],
+							"path": [
+								"admin",
+								"updateRole",
+								"624b090584fe1d7ef075f2d9"
+							],
+							"query": [
+								{
+									"key": "roles",
+									"value": "admin,vendor"
+								},
+								{
+									"key": "approve",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Approve/Reject User Role Change",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/v1/admin/updateRole/624b090584fe1d7ef075f2d9/44c1290c2c8d0df2eb46fc99649eb5a858b3cac6?roles=admin&approve=true",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"updateRole",
+										"624b090584fe1d7ef075f2d9",
+										"44c1290c2c8d0df2eb46fc99649eb5a858b3cac6"
+									],
+									"query": [
+										{
+											"key": "roles",
+											"value": "admin"
+										},
+										{
+											"key": "approve",
+											"value": "true"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "115"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"73-kDZVxqZIku4ethGks6VifVNYdWk\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 05 Apr 2022 07:03:56 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"httpStatusCode\": 403,\n    \"type\": \"General\",\n    \"message\": \"You don't have permission to access this resource\",\n    \"errors\": null\n}"
+						},
+						{
+							"name": "Approve",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/v1/admin/updateRole/624b090584fe1d7ef075f2d9/44c1290c2c8d0df2eb46fc99649eb5a858b3cac6?roles=admin&approve=true",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"updateRole",
+										"624b090584fe1d7ef075f2d9",
+										"44c1290c2c8d0df2eb46fc99649eb5a858b3cac6"
+									],
+									"query": [
+										{
+											"key": "roles",
+											"value": "admin"
+										},
+										{
+											"key": "approve",
+											"value": "true"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "280"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"118-I30DFnDSK3plD3s2IOFz9s/iGfU\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 05 Apr 2022 07:04:49 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User role updated\",\n    \"data\": {\n        \"_id\": \"624b090584fe1d7ef075f2d9\",\n        \"name\": \"ashutosh\",\n        \"email\": \"test5@test.com\",\n        \"status\": \"active\",\n        \"role\": [\n            \"user\",\n            \"admin\"\n        ],\n        \"confirmUserToken\": null,\n        \"confirmUserExpires\": null,\n        \"createdAt\": \"2022-04-04T15:04:37.434Z\",\n        \"__v\": 0,\n        \"roleChangeRequest\": null\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Add Admins",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{DOMAIN}}/admin/alladmins",
+							"host": [
+								"{{DOMAIN}}"
+							],
+							"path": [
+								"admin",
+								"alladmins"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Add Admins",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{DOMAIN}}/admin/alladmins",
+									"host": [
+										"{{DOMAIN}}"
+									],
+									"path": [
+										"admin",
+										"alladmins"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "534"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"216-gTNJn+C3kfPIpwJqFWDUa46ZzrQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 06 Apr 2022 06:24:26 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"All admin\",\n    \"data\": [\n        {\n            \"photo\": {\n                \"id\": \"tKart/Users/fkt9orxqv2tku8e1l4sg\"\n            },\n            \"_id\": \"6248848a771f0ce9326b232f\",\n            \"name\": \"ashutosh\",\n            \"email\": \"test4@test.com\",\n            \"status\": \"active\",\n            \"role\": [\n                \"admin\"\n            ],\n            \"confirmUserToken\": null,\n            \"confirmUserExpires\": null,\n            \"createdAt\": \"2022-04-02T17:14:50.158Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"624b090584fe1d7ef075f2d9\",\n            \"name\": \"ashutosh\",\n            \"email\": \"test5@test.com\",\n            \"status\": \"active\",\n            \"role\": [\n                \"user\",\n                \"admin\"\n            ],\n            \"confirmUserToken\": null,\n            \"confirmUserExpires\": null,\n            \"createdAt\": \"2022-04-04T15:04:37.434Z\",\n            \"__v\": 0,\n            \"roleChangeRequest\": null\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "addProduct",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const tshirtCategory = [\"shortsleeve\", \"longsleeve\", \"sweatshirt\", \"hoodie\"]",
+									"const idx = Math.floor(Math.random() * tshirtCategory.length);",
+									"pm.globals.set(\"category\", tshirtCategory[idx]);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "{{$randomProductName}}",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "{{$randomPrice}}",
+									"type": "text"
+								},
+								{
+									"key": "discription",
+									"value": "{{$randomPhrase}}",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "{{category}}",
+									"type": "text"
+								},
+								{
+									"key": "brand",
+									"value": "{{$randomCompanyName}}",
+									"type": "text"
+								},
+								{
+									"key": "photos",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "{{DOMAIN}}/product/add",
+							"host": [
+								"{{DOMAIN}}"
+							],
+							"path": [
+								"product",
+								"add"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "addProduct - Wrong data passed",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Men's Regular fit T-shirt",
+											"type": "text"
+										},
+										{
+											"key": "price",
+											"value": "509.0",
+											"type": "text"
+										},
+										{
+											"key": "discription",
+											"value": "Trans Textile, Arvind Lifestyle Brands Limited, It' is very good product.",
+											"type": "text"
+										},
+										{
+											"key": "category",
+											"value": "halfsleeve",
+											"type": "text"
+										},
+										{
+											"key": "brand",
+											"value": "U.S. Polo Association",
+											"type": "text"
+										},
+										{
+											"key": "photos",
+											"type": "file",
+											"src": [
+												"/Users/atk81/Downloads/beard.png",
+												"/Users/atk81/Downloads/gamer.png"
+											]
+										}
+									]
+								},
+								"url": {
+									"raw": "{{DOMAIN}}/product/add",
+									"host": [
+										"{{DOMAIN}}"
+									],
+									"path": [
+										"product",
+										"add"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "985"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3d9-VwmHPo4zkUybY9nlobYmMWm+CU0\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 03 Apr 2022 13:58:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"httpStatusCode\": 400,\n    \"type\": \"Validation\",\n    \"message\": \"\\t\\u001b[31mProduct validation failed: category: Category is invalid, please choose from the following: shortsleeve, longsleeve, sweatshirt, hoodie\\u001b[39m\",\n    \"errors\": {\n        \"errors\": {\n            \"category\": {\n                \"name\": \"ValidatorError\",\n                \"message\": \"Category is invalid, please choose from the following: shortsleeve, longsleeve, sweatshirt, hoodie\",\n                \"properties\": {\n                    \"message\": \"Category is invalid, please choose from the following: shortsleeve, longsleeve, sweatshirt, hoodie\",\n                    \"type\": \"enum\",\n                    \"enumValues\": [\n                        \"shortsleeve\",\n                        \"longsleeve\",\n                        \"sweatshirt\",\n                        \"hoodie\"\n                    ],\n                    \"path\": \"category\",\n                    \"value\": \"halfsleeve\"\n                },\n                \"kind\": \"enum\",\n                \"path\": \"category\",\n                \"value\": \"halfsleeve\"\n            }\n        },\n        \"_message\": \"Product validation failed\",\n        \"level\": \"\\u001b[31merror\\u001b[39m\",\n        \"timestamp\": \"2022-04-03 01:58:36 PM\",\n        \"name\": \"ValidationError\",\n        \"message\": \"\\t\\u001b[31mProduct validation failed: category: Category is invalid, please choose from the following: shortsleeve, longsleeve, sweatshirt, hoodie\\u001b[39m\"\n    }\n}"
+						},
+						{
+							"name": "addProduct",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Men's Regular fit T-shirt",
+											"type": "text"
+										},
+										{
+											"key": "price",
+											"value": "509.0",
+											"type": "text"
+										},
+										{
+											"key": "discription",
+											"value": "Trans Textile, Arvind Lifestyle Brands Limited, It' is very good product.",
+											"type": "text"
+										},
+										{
+											"key": "category",
+											"value": "shortsleeve",
+											"type": "text"
+										},
+										{
+											"key": "brand",
+											"value": "U.S. Polo Association",
+											"type": "text"
+										},
+										{
+											"key": "photos",
+											"type": "file",
+											"src": [
+												"/Users/atk81/Downloads/beard.png",
+												"/Users/atk81/Downloads/gamer.png"
+											]
+										}
+									]
+								},
+								"url": {
+									"raw": "{{DOMAIN}}/product/add",
+									"host": [
+										"{{DOMAIN}}"
+									],
+									"path": [
+										"product",
+										"add"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "803"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"323-BiP0cwC1ed8kmIZpwbbJ2VUxnRA\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 03 Apr 2022 14:00:51 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Product added successfully.\",\n    \"data\": {\n        \"name\": \"Men's Regular fit T-shirt\",\n        \"price\": 509,\n        \"discription\": \"Trans Textile, Arvind Lifestyle Brands Limited, It' is very good product.\",\n        \"category\": \"shortsleeve\",\n        \"brand\": \"U.S. Polo Association\",\n        \"rating\": 0,\n        \"numberofreviews\": 0,\n        \"reviews\": [],\n        \"productOwner\": \"6248848a771f0ce9326b232f\",\n        \"createdAt\": \"2022-04-03T14:00:49.838Z\",\n        \"_id\": \"6249a8918404499b6655c065\",\n        \"photos\": [\n            {\n                \"id\": \"tKart/Products/o5xsitylmdy5npygl0zq\",\n                \"secure_url\": \"https://res.cloudinary.com/atk81/image/upload/v1648994451/tKart/Products/o5xsitylmdy5npygl0zq.png\",\n                \"_id\": \"6249a8938404499b6655c066\"\n            },\n            {\n                \"id\": \"tKart/Products/nn7s7fybxml4uej256ve\",\n                \"secure_url\": \"https://res.cloudinary.com/atk81/image/upload/v1648994451/tKart/Products/nn7s7fybxml4uej256ve.png\",\n                \"_id\": \"6249a8938404499b6655c067\"\n            }\n        ],\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Product",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Men's Slim fit T-shirt",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "499",
+									"type": "text"
+								},
+								{
+									"key": "photos",
+									"type": "file",
+									"src": [
+										"/Users/atk81/Downloads/gamer.png",
+										"/Users/atk81/Downloads/mohamad-khosravi-4fkUAduhoSY-unsplash.jpg"
+									]
+								}
+							]
+						},
+						"url": {
+							"raw": "{{DOMAIN}}/product/6249a8538404499b6655c060",
+							"host": [
+								"{{DOMAIN}}"
+							],
+							"path": [
+								"product",
+								"6249a8538404499b6655c060"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update Product - Unauthorized",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Men's fit T-shirt\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DOMAIN}}/product/update",
+									"host": [
+										"{{DOMAIN}}"
+									],
+									"path": [
+										"product",
+										"update"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "115"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"73-kDZVxqZIku4ethGks6VifVNYdWk\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 06 Apr 2022 17:18:24 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"httpStatusCode\": 403,\n    \"type\": \"General\",\n    \"message\": \"You don't have permission to access this resource\",\n    \"errors\": null\n}"
+						},
+						{
+							"name": "Update Product",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Men's Slim fit T-shirt",
+											"type": "text"
+										},
+										{
+											"key": "price",
+											"value": "499",
+											"type": "text"
+										},
+										{
+											"key": "photos",
+											"type": "file",
+											"src": [
+												"/Users/atk81/Downloads/gamer.png",
+												"/Users/atk81/Downloads/mohamad-khosravi-4fkUAduhoSY-unsplash.jpg"
+											]
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DOMAIN}}/product/6249a8538404499b6655c060",
+									"host": [
+										"{{DOMAIN}}"
+									],
+									"path": [
+										"product",
+										"6249a8538404499b6655c060"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1184"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4a0-Twu0HWMod5jRRRPGqLDKzQ+EQY0\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 06 Apr 2022 18:11:12 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Product updated successfully.\",\n    \"data\": {\n        \"_id\": \"6249a8538404499b6655c060\",\n        \"name\": \"Men's Slim fit T-shirt\",\n        \"price\": 499,\n        \"discription\": \"Trans Textile, Arvind Lifestyle Brands Limited, It' is very good product.\",\n        \"category\": \"shortsleeve\",\n        \"brand\": \"U.S. Polo Association\",\n        \"rating\": 0,\n        \"numberofreviews\": 0,\n        \"reviews\": [],\n        \"productOwner\": \"6248848a771f0ce9326b232f\",\n        \"createdAt\": \"2022-04-03T13:59:47.563Z\",\n        \"photos\": [\n            {\n                \"id\": \"tKart/Products/vbim7abbrnt6knpd7uka\",\n                \"secure_url\": \"https://res.cloudinary.com/atk81/image/upload/v1648994389/tKart/Products/vbim7abbrnt6knpd7uka.png\",\n                \"_id\": \"6249a8558404499b6655c061\"\n            },\n            {\n                \"id\": \"tKart/Products/dvaa20oln09y7gr0beuy\",\n                \"secure_url\": \"https://res.cloudinary.com/atk81/image/upload/v1648994389/tKart/Products/dvaa20oln09y7gr0beuy.png\",\n                \"_id\": \"6249a8558404499b6655c062\"\n            },\n            {\n                \"id\": \"tKart/Products/rpqaxgdz1zjhqun1tklv\",\n                \"secure_url\": \"https://res.cloudinary.com/atk81/image/upload/v1649268669/tKart/Products/rpqaxgdz1zjhqun1tklv.png\",\n                \"_id\": \"624dd7c0d175f7347f73e867\"\n            },\n            {\n                \"id\": \"tKart/Products/ybdqkwuoiy3z7umw2gef\",\n                \"secure_url\": \"https://res.cloudinary.com/atk81/image/upload/v1649268671/tKart/Products/ybdqkwuoiy3z7umw2gef.jpg\",\n                \"_id\": \"624dd7c0d175f7347f73e868\"\n            }\n        ],\n        \"__v\": 1\n    }\n}"
+						},
+						{
+							"name": "Update Product - upload single photo",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Men's Slim fit T-shirt",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "price",
+											"value": "499",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "photos",
+											"type": "file",
+											"src": "/Users/atk81/Downloads/beard.png"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{DOMAIN}}/product/6249a8538404499b6655c060",
+									"host": [
+										"{{DOMAIN}}"
+									],
+									"path": [
+										"product",
+										"6249a8538404499b6655c060"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2139"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"85b-faONMMiDfgcPtUW/BuPQG8REF8s\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 07 Apr 2022 04:41:22 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Product updated successfully.\",\n    \"data\": {\n        \"_id\": \"6249a8538404499b6655c060\",\n        \"name\": \"Men's Slim fit T-shirt\",\n        \"price\": 499,\n        \"discription\": \"Trans Textile, Arvind Lifestyle Brands Limited, It' is very good product.\",\n        \"category\": \"shortsleeve\",\n        \"brand\": \"U.S. Polo Association\",\n        \"rating\": 0,\n        \"numberofreviews\": 0,\n        \"reviews\": [],\n        \"productOwner\": \"6248848a771f0ce9326b232f\",\n        \"createdAt\": \"2022-04-03T13:59:47.563Z\",\n        \"photos\": [\n            {\n                \"id\": \"tKart/Products/vbim7abbrnt6knpd7uka\",\n                \"secure_url\": \"https://res.cloudinary.com/atk81/image/upload/v1648994389/tKart/Products/vbim7abbrnt6knpd7uka.png\",\n                \"_id\": \"6249a8558404499b6655c061\"\n            },\n            {\n                \"id\": \"tKart/Products/dvaa20oln09y7gr0beuy\",\n                \"secure_url\": \"https://res.cloudinary.com/atk81/image/upload/v1648994389/tKart/Products/dvaa20oln09y7gr0beuy.png\",\n                \"_id\": \"6249a8558404499b6655c062\"\n            },\n            {\n                \"id\": \"tKart/Products/rpqaxgdz1zjhqun1tklv\",\n                \"secure_url\": \"https://res.cloudinary.com/atk81/image/upload/v1649268669/tKart/Products/rpqaxgdz1zjhqun1tklv.png\",\n                \"_id\": \"624dd7c0d175f7347f73e867\"\n            },\n            {\n                \"id\": \"tKart/Products/ybdqkwuoiy3z7umw2gef\",\n                \"secure_url\": \"https://res.cloudinary.com/atk81/image/upload/v1649268671/tKart/Products/ybdqkwuoiy3z7umw2gef.jpg\",\n                \"_id\": \"624dd7c0d175f7347f73e868\"\n            },\n            {\n                \"id\": \"tKart/Products/uahjeqjjaigkmgxu4mtd\",\n                \"secure_url\": \"https://res.cloudinary.com/atk81/image/upload/v1649306164/tKart/Products/uahjeqjjaigkmgxu4mtd.png\",\n                \"_id\": \"624e6a343682174992f4d9f2\"\n            },\n            {\n                \"id\": \"tKart/Products/sue9hk2xqie9duakc1ym\",\n                \"secure_url\": \"https://res.cloudinary.com/atk81/image/upload/v1649306164/tKart/Products/sue9hk2xqie9duakc1ym.png\",\n                \"_id\": \"624e6a343682174992f4d9f3\"\n            },\n            {\n                \"id\": \"tKart/Products/anr2zz6xjjwzd1yyxkaw\",\n                \"secure_url\": \"https://res.cloudinary.com/atk81/image/upload/v1649306462/tKart/Products/anr2zz6xjjwzd1yyxkaw.png\",\n                \"_id\": \"624e6b5f86cca5cd100cb4c4\"\n            },\n            {\n                \"id\": \"tKart/Products/l1h0xw1ibqejmbsu5ndj\",\n                \"secure_url\": \"https://res.cloudinary.com/atk81/image/upload/v1649306462/tKart/Products/l1h0xw1ibqejmbsu5ndj.png\",\n                \"_id\": \"624e6b5f86cca5cd100cb4c5\"\n            },\n            {\n                \"id\": \"tKart/Products/wxizm1hnnlrnct62slx3\",\n                \"secure_url\": \"https://res.cloudinary.com/atk81/image/upload/v1649306481/tKart/Products/wxizm1hnnlrnct62slx3.png\",\n                \"_id\": \"624e6b7286cca5cd100cb4c9\"\n            }\n        ],\n        \"__v\": 4\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Product Photo",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"photos\": [\"tKart/Products/ybdqkwuoiy3z7umw2gef\", \"tKart/Products/rpqaxgdz1zjhqun1tklv\", \"tKart/Products/dvaa20oln09y7gr0beuy\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DOMAIN}}/product/6249a8538404499b6655c060/deletePhotos",
+							"host": [
+								"{{DOMAIN}}"
+							],
+							"path": [
+								"product",
+								"6249a8538404499b6655c060",
+								"deletePhotos"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete Product Photo - single photo delete",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"photos\": [\"tKart/Products/ybdqkwuoiy3z7umw2gef\"]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DOMAIN}}/product/6249a8538404499b6655c060/deletePhotos",
+									"host": [
+										"{{DOMAIN}}"
+									],
+									"path": [
+										"product",
+										"6249a8538404499b6655c060",
+										"deletePhotos"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1948"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"79c-/vTAdpIE2sXicCRmr2gOHs8hq6s\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 07 Apr 2022 05:50:11 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Product updated successfully.\",\n    \"data\": {\n        \"_id\": \"6249a8538404499b6655c060\",\n        \"name\": \"Men's Slim fit T-shirt\",\n        \"price\": 499,\n        \"discription\": \"Trans Textile, Arvind Lifestyle Brands Limited, It' is very good product.\",\n        \"category\": \"shortsleeve\",\n        \"brand\": \"U.S. Polo Association\",\n        \"rating\": 0,\n        \"numberofreviews\": 0,\n        \"reviews\": [],\n        \"productOwner\": \"6248848a771f0ce9326b232f\",\n        \"createdAt\": \"2022-04-03T13:59:47.563Z\",\n        \"photos\": [\n            {\n                \"id\": \"tKart/Products/vbim7abbrnt6knpd7uka\",\n                \"secure_url\": \"https://res.cloudinary.com/atk81/image/upload/v1648994389/tKart/Products/vbim7abbrnt6knpd7uka.png\",\n                \"_id\": \"6249a8558404499b6655c061\"\n            },\n            {\n                \"id\": \"tKart/Products/dvaa20oln09y7gr0beuy\",\n                \"secure_url\": \"https://res.cloudinary.com/atk81/image/upload/v1648994389/tKart/Products/dvaa20oln09y7gr0beuy.png\",\n                \"_id\": \"6249a8558404499b6655c062\"\n            },\n            {\n                \"id\": \"tKart/Products/rpqaxgdz1zjhqun1tklv\",\n                \"secure_url\": \"https://res.cloudinary.com/atk81/image/upload/v1649268669/tKart/Products/rpqaxgdz1zjhqun1tklv.png\",\n                \"_id\": \"624dd7c0d175f7347f73e867\"\n            },\n            {\n                \"id\": \"tKart/Products/uahjeqjjaigkmgxu4mtd\",\n                \"secure_url\": \"https://res.cloudinary.com/atk81/image/upload/v1649306164/tKart/Products/uahjeqjjaigkmgxu4mtd.png\",\n                \"_id\": \"624e6a343682174992f4d9f2\"\n            },\n            {\n                \"id\": \"tKart/Products/sue9hk2xqie9duakc1ym\",\n                \"secure_url\": \"https://res.cloudinary.com/atk81/image/upload/v1649306164/tKart/Products/sue9hk2xqie9duakc1ym.png\",\n                \"_id\": \"624e6a343682174992f4d9f3\"\n            },\n            {\n                \"id\": \"tKart/Products/anr2zz6xjjwzd1yyxkaw\",\n                \"secure_url\": \"https://res.cloudinary.com/atk81/image/upload/v1649306462/tKart/Products/anr2zz6xjjwzd1yyxkaw.png\",\n                \"_id\": \"624e6b5f86cca5cd100cb4c4\"\n            },\n            {\n                \"id\": \"tKart/Products/l1h0xw1ibqejmbsu5ndj\",\n                \"secure_url\": \"https://res.cloudinary.com/atk81/image/upload/v1649306462/tKart/Products/l1h0xw1ibqejmbsu5ndj.png\",\n                \"_id\": \"624e6b5f86cca5cd100cb4c5\"\n            },\n            {\n                \"id\": \"tKart/Products/wxizm1hnnlrnct62slx3\",\n                \"secure_url\": \"https://res.cloudinary.com/atk81/image/upload/v1649306481/tKart/Products/wxizm1hnnlrnct62slx3.png\",\n                \"_id\": \"624e6b7286cca5cd100cb4c9\"\n            }\n        ],\n        \"__v\": 5\n    }\n}"
+						},
+						{
+							"name": "Delete Product Photo - multiple photo delete",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"photos\": [\"tKart/Products/ybdqkwuoiy3z7umw2gef\", \"tKart/Products/rpqaxgdz1zjhqun1tklv\", \"tKart/Products/dvaa20oln09y7gr0beuy\"]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DOMAIN}}/product/6249a8538404499b6655c060/deletePhotos",
+									"host": [
+										"{{DOMAIN}}"
+									],
+									"path": [
+										"product",
+										"6249a8538404499b6655c060",
+										"deletePhotos"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1566"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"61e-dbonnFAw7e4MfGVpZXMktpzTrs4\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 07 Apr 2022 05:51:06 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Product updated successfully.\",\n    \"data\": {\n        \"_id\": \"6249a8538404499b6655c060\",\n        \"name\": \"Men's Slim fit T-shirt\",\n        \"price\": 499,\n        \"discription\": \"Trans Textile, Arvind Lifestyle Brands Limited, It' is very good product.\",\n        \"category\": \"shortsleeve\",\n        \"brand\": \"U.S. Polo Association\",\n        \"rating\": 0,\n        \"numberofreviews\": 0,\n        \"reviews\": [],\n        \"productOwner\": \"6248848a771f0ce9326b232f\",\n        \"createdAt\": \"2022-04-03T13:59:47.563Z\",\n        \"photos\": [\n            {\n                \"id\": \"tKart/Products/vbim7abbrnt6knpd7uka\",\n                \"secure_url\": \"https://res.cloudinary.com/atk81/image/upload/v1648994389/tKart/Products/vbim7abbrnt6knpd7uka.png\",\n                \"_id\": \"6249a8558404499b6655c061\"\n            },\n            {\n                \"id\": \"tKart/Products/uahjeqjjaigkmgxu4mtd\",\n                \"secure_url\": \"https://res.cloudinary.com/atk81/image/upload/v1649306164/tKart/Products/uahjeqjjaigkmgxu4mtd.png\",\n                \"_id\": \"624e6a343682174992f4d9f2\"\n            },\n            {\n                \"id\": \"tKart/Products/sue9hk2xqie9duakc1ym\",\n                \"secure_url\": \"https://res.cloudinary.com/atk81/image/upload/v1649306164/tKart/Products/sue9hk2xqie9duakc1ym.png\",\n                \"_id\": \"624e6a343682174992f4d9f3\"\n            },\n            {\n                \"id\": \"tKart/Products/anr2zz6xjjwzd1yyxkaw\",\n                \"secure_url\": \"https://res.cloudinary.com/atk81/image/upload/v1649306462/tKart/Products/anr2zz6xjjwzd1yyxkaw.png\",\n                \"_id\": \"624e6b5f86cca5cd100cb4c4\"\n            },\n            {\n                \"id\": \"tKart/Products/l1h0xw1ibqejmbsu5ndj\",\n                \"secure_url\": \"https://res.cloudinary.com/atk81/image/upload/v1649306462/tKart/Products/l1h0xw1ibqejmbsu5ndj.png\",\n                \"_id\": \"624e6b5f86cca5cd100cb4c5\"\n            },\n            {\n                \"id\": \"tKart/Products/wxizm1hnnlrnct62slx3\",\n                \"secure_url\": \"https://res.cloudinary.com/atk81/image/upload/v1649306481/tKart/Products/wxizm1hnnlrnct62slx3.png\",\n                \"_id\": \"624e6b7286cca5cd100cb4c9\"\n            }\n        ],\n        \"__v\": 6\n    }\n}"
+						},
+						{
+							"name": "Delete Product Photo - no photo id passed",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DOMAIN}}/product/6249a8538404499b6655c060/deletePhotos",
+									"host": [
+										"{{DOMAIN}}"
+									],
+									"path": [
+										"product",
+										"6249a8538404499b6655c060",
+										"deletePhotos"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "64"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"40-dw2JJ99LYq9NvwAGQK9+L+U7JLE\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 07 Apr 2022 05:51:47 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Please provide the photo ids to delete\",\n    \"data\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Product",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{DOMAIN}}/product/6249a8538404499b6655c060",
+							"host": [
+								"{{DOMAIN}}"
+							],
+							"path": [
+								"product",
+								"6249a8538404499b6655c060"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{DOMAIN}}/product/6249a8538404499b6655c060",
+							"host": [
+								"{{DOMAIN}}"
+							],
+							"path": [
+								"product",
+								"6249a8538404499b6655c060"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Single Product - Product found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{DOMAIN}}/product/6249a8538404499b6655c060",
+									"host": [
+										"{{DOMAIN}}"
+									],
+									"path": [
+										"product",
+										"6249a8538404499b6655c060"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "805"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"325-o9roF/qtK3QZAP+dXuQLIxwFkgg\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 06 Apr 2022 10:29:46 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Product fetched successfully.\",\n    \"data\": {\n        \"_id\": \"6249a8538404499b6655c060\",\n        \"name\": \"Men's Regular fit T-shirt\",\n        \"price\": 509,\n        \"discription\": \"Trans Textile, Arvind Lifestyle Brands Limited, It' is very good product.\",\n        \"category\": \"shortsleeve\",\n        \"brand\": \"U.S. Polo Association\",\n        \"rating\": 0,\n        \"numberofreviews\": 0,\n        \"reviews\": [],\n        \"productOwner\": \"6248848a771f0ce9326b232f\",\n        \"createdAt\": \"2022-04-03T13:59:47.563Z\",\n        \"photos\": [\n            {\n                \"id\": \"tKart/Products/vbim7abbrnt6knpd7uka\",\n                \"secure_url\": \"https://res.cloudinary.com/atk81/image/upload/v1648994389/tKart/Products/vbim7abbrnt6knpd7uka.png\",\n                \"_id\": \"6249a8558404499b6655c061\"\n            },\n            {\n                \"id\": \"tKart/Products/dvaa20oln09y7gr0beuy\",\n                \"secure_url\": \"https://res.cloudinary.com/atk81/image/upload/v1648994389/tKart/Products/dvaa20oln09y7gr0beuy.png\",\n                \"_id\": \"6249a8558404499b6655c062\"\n            }\n        ],\n        \"__v\": 0\n    }\n}"
+						},
+						{
+							"name": "Get Single Product - Not found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{DOMAIN}}/product/6249a8538404499b6655c06a",
+									"host": [
+										"{{DOMAIN}}"
+									],
+									"path": [
+										"product",
+										"6249a8538404499b6655c06a"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "44"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2c-ICTWNmUEtfwAZyLLDv7INldsBi0\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 06 Apr 2022 10:30:23 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Product not found.\",\n    \"data\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Products",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Review",
+			"item": [
+				{
+					"name": "Get All reviews",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{DOMAIN}}/product/6249a8918404499b6655c065/reviews",
+							"host": [
+								"{{DOMAIN}}"
+							],
+							"path": [
+								"product",
+								"6249a8918404499b6655c065",
+								"reviews"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get All reviews",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{DOMAIN}}/product/6249a8918404499b6655c065/reviews",
+									"host": [
+										"{{DOMAIN}}"
+									],
+									"path": [
+										"product",
+										"6249a8918404499b6655c065",
+										"reviews"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "224"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"e0-FW/Eyy/DgQByWC5/dzgQPMn2rFo\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 07 Apr 2022 14:17:55 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Reviews found\",\n    \"data\": [\n        {\n            \"_id\": \"624ef252d1a5c9c367cb7530\",\n            \"user\": \"6248848a771f0ce9326b232f\",\n            \"product\": \"6249a8918404499b6655c065\",\n            \"rating\": 3,\n            \"comment\": \"Bad Product\",\n            \"createdAt\": \"2022-04-07T14:16:50.130Z\",\n            \"__v\": 0\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Add review",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"rating\": 3,\n    \"comment\": \"Bad Product\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DOMAIN}}/product/6249a8918404499b6655c065/addreview",
+							"host": [
+								"{{DOMAIN}}"
+							],
+							"path": [
+								"product",
+								"6249a8918404499b6655c065",
+								"addreview"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Add review",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"rating\": 3,\n    \"comment\": \"Bad Product\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DOMAIN}}/product/6249a8918404499b6655c065/addreview",
+									"host": [
+										"{{DOMAIN}}"
+									],
+									"path": [
+										"product",
+										"6249a8918404499b6655c065",
+										"addreview"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1025"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"401-zHutVQC7RxbSTE0qlOpTN7I/BE8\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 07 Apr 2022 14:17:14 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Review updated\",\n    \"data\": {\n        \"review\": {\n            \"_id\": \"624ef252d1a5c9c367cb7530\",\n            \"user\": \"6248848a771f0ce9326b232f\",\n            \"product\": \"6249a8918404499b6655c065\",\n            \"rating\": 3,\n            \"comment\": \"Bad Product\",\n            \"createdAt\": \"2022-04-07T14:16:50.130Z\",\n            \"__v\": 0\n        },\n        \"product\": {\n            \"_id\": \"6249a8918404499b6655c065\",\n            \"name\": \"Men's Regular fit T-shirt\",\n            \"price\": 509,\n            \"discription\": \"Trans Textile, Arvind Lifestyle Brands Limited, It' is very good product.\",\n            \"category\": \"shortsleeve\",\n            \"brand\": \"U.S. Polo Association\",\n            \"rating\": 3,\n            \"numberofreviews\": 1,\n            \"reviews\": [\n                \"624ef252d1a5c9c367cb7530\"\n            ],\n            \"productOwner\": \"6248848a771f0ce9326b232f\",\n            \"createdAt\": \"2022-04-03T14:00:49.838Z\",\n            \"photos\": [\n                {\n                    \"id\": \"tKart/Products/o5xsitylmdy5npygl0zq\",\n                    \"secure_url\": \"https://res.cloudinary.com/atk81/image/upload/v1648994451/tKart/Products/o5xsitylmdy5npygl0zq.png\",\n                    \"_id\": \"6249a8938404499b6655c066\"\n                },\n                {\n                    \"id\": \"tKart/Products/nn7s7fybxml4uej256ve\",\n                    \"secure_url\": \"https://res.cloudinary.com/atk81/image/upload/v1648994451/tKart/Products/nn7s7fybxml4uej256ve.png\",\n                    \"_id\": \"6249a8938404499b6655c067\"\n                }\n            ],\n            \"__v\": 0\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Remove Review",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{DOMAIN}}/product/6249a8918404499b6655c065/removereview",
+							"host": [
+								"{{DOMAIN}}"
+							],
+							"path": [
+								"product",
+								"6249a8918404499b6655c065",
+								"removereview"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Remove Review",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{DOMAIN}}/product/6249a8918404499b6655c065/removereview",
+									"host": [
+										"{{DOMAIN}}"
+									],
+									"path": [
+										"product",
+										"6249a8918404499b6655c065",
+										"removereview"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "999"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3e7-D/qByq83+LHaUCKRNqrym48lyfU\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 07 Apr 2022 14:23:42 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Review removed\",\n    \"data\": {\n        \"product\": {\n            \"_id\": \"6249a8918404499b6655c065\",\n            \"name\": \"Men's Regular fit T-shirt\",\n            \"price\": 509,\n            \"discription\": \"Trans Textile, Arvind Lifestyle Brands Limited, It' is very good product.\",\n            \"category\": \"shortsleeve\",\n            \"brand\": \"U.S. Polo Association\",\n            \"rating\": 0,\n            \"numberofreviews\": 0,\n            \"reviews\": [],\n            \"productOwner\": \"6248848a771f0ce9326b232f\",\n            \"createdAt\": \"2022-04-03T14:00:49.838Z\",\n            \"photos\": [\n                {\n                    \"id\": \"tKart/Products/o5xsitylmdy5npygl0zq\",\n                    \"secure_url\": \"https://res.cloudinary.com/atk81/image/upload/v1648994451/tKart/Products/o5xsitylmdy5npygl0zq.png\",\n                    \"_id\": \"6249a8938404499b6655c066\"\n                },\n                {\n                    \"id\": \"tKart/Products/nn7s7fybxml4uej256ve\",\n                    \"secure_url\": \"https://res.cloudinary.com/atk81/image/upload/v1648994451/tKart/Products/nn7s7fybxml4uej256ve.png\",\n                    \"_id\": \"6249a8938404499b6655c067\"\n                }\n            ],\n            \"__v\": 1\n        },\n        \"review\": {\n            \"_id\": \"624ef252d1a5c9c367cb7530\",\n            \"user\": \"6248848a771f0ce9326b232f\",\n            \"product\": \"6249a8918404499b6655c065\",\n            \"rating\": 3,\n            \"comment\": \"Bad Product\",\n            \"createdAt\": \"2022-04-07T14:16:50.130Z\",\n            \"__v\": 0\n        }\n    }\n}"
+						},
+						{
+							"name": "Review not found",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{DOMAIN}}/product/6249a8918404499b6655c065/removereview",
+									"host": [
+										"{{DOMAIN}}"
+									],
+									"path": [
+										"product",
+										"6249a8918404499b6655c065",
+										"removereview"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "82"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"52-KiMC5qB3/0LgMUNncZYoNSCsrCs\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 07 Apr 2022 14:25:18 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"httpStatusCode\": 404,\n    \"type\": \"General\",\n    \"message\": \"Review not found\",\n    \"errors\": null\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "Add to Cart",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": [
+						{
+							"name": "Add to Cart - Remove product from the cart when it's not exits",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"quantity\": -1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DOMAIN}}/product/6250ea751a12e90504ef5f0f/addtocart",
+									"host": [
+										"{{DOMAIN}}"
+									],
+									"path": [
+										"product",
+										"6250ea751a12e90504ef5f0f",
+										"addtocart"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "100"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"64-23aT4H5Mu+aXfonMB4tkAy/t8Vo\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 09 Apr 2022 02:21:43 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"httpStatusCode\": 400,\n    \"type\": \"General\",\n    \"message\": \"Product doesn't exits in your cart\",\n    \"errors\": null\n}"
+						},
+						{
+							"name": "Add to Cart",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"quantity\": 2\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DOMAIN}}/product/6250ea751a12e90504ef5f0f/addtocart",
+									"host": [
+										"{{DOMAIN}}"
+									],
+									"path": [
+										"product",
+										"6250ea751a12e90504ef5f0f",
+										"addtocart"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "155"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"9b-k0/7928M8mkT5bPQwyApS8Dh3/I\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 09 Apr 2022 05:54:42 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Product added to cart\",\n    \"data\": {\n        \"total\": 1836.84,\n        \"items\": [\n            {\n                \"product\": \"6250ea751a12e90504ef5f0f\",\n                \"quantity\": 2,\n                \"_id\": \"62511fa2b81247873144c284\"\n            }\n        ]\n    }\n}"
+						},
+						{
+							"name": "Add to Cart - Remove all product",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"quantity\": -2\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DOMAIN}}/product/6250ea751a12e90504ef5f0f/addtocart",
+									"host": [
+										"{{DOMAIN}}"
+									],
+									"path": [
+										"product",
+										"6250ea751a12e90504ef5f0f",
+										"addtocart"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "65"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"41-vZqo5fdTlWv/jxiU1zeyFS9HJmA\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 09 Apr 2022 07:51:12 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Product added to cart\",\n    \"data\": {\n        \"total\": 0,\n        \"items\": []\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Cart",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{DOMAIN}}/user/cart",
+							"host": [
+								"{{DOMAIN}}"
+							],
+							"path": [
+								"user",
+								"cart"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Cart",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{DOMAIN}}/user/cart",
+									"host": [
+										"{{DOMAIN}}"
+									],
+									"path": [
+										"user",
+										"cart"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "246"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"f6-AQYpjqSFZ/71tDgEbRoDDg/Q1h8\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 10 Apr 2022 16:57:19 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Cart retrieved successfully\",\n    \"data\": {\n        \"total\": 3139.24,\n        \"items\": [\n            {\n                \"product\": \"6250eac31a12e90504ef5f30\",\n                \"quantity\": 2,\n                \"_id\": \"62513b0fe5f38bc2a5df4ce3\"\n            },\n            {\n                \"product\": \"6250ea751a12e90504ef5f0f\",\n                \"quantity\": 2,\n                \"_id\": \"62513b13e5f38bc2a5df4ce8\"\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Order",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"items\": [\n        {\n            \"product\": \"6250eac31a12e90504ef5f30\",\n            \"quantity\": 2,\n            \"address\": \"62524ac0606d917343d996d1\"\n        },\n        {\n            \"product\": \"6250ea751a12e90504ef5f0f\",\n            \"quantity\": 2,\n            \"address\": \"6252ab5dfe54f2a0f6a7aa2a\"\n        }\n    ],\n    \"payment_id\": \"{{$guid}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DOMAIN}}/user/createOrder",
+							"host": [
+								"{{DOMAIN}}"
+							],
+							"path": [
+								"user",
+								"createOrder"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Order",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"items\": [\n        {\n            \"product\": \"6250eac31a12e90504ef5f30\",\n            \"quantity\": 2,\n            \"address\": \"62524ac0606d917343d996d1\"\n        },\n        {\n            \"product\": \"6250ea751a12e90504ef5f0f\",\n            \"quantity\": 2,\n            \"address\": \"6252ab5dfe54f2a0f6a7aa2a\"\n        }\n    ],\n    \"payment_id\": \"{{$guid}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DOMAIN}}/user/createOrder",
+									"host": [
+										"{{DOMAIN}}"
+									],
+									"path": [
+										"user",
+										"createOrder"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1563"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"61b-r/SvLz3/6Xw3IfNroknFGzRGVNI\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 11 Apr 2022 02:20:40 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Order created\",\n    \"data\": {\n        \"order\": {\n            \"user\": \"624ff5db1e1d6674232488dc\",\n            \"products\": {\n                \"items\": [\n                    {\n                        \"product\": \"6250eac31a12e90504ef5f30\",\n                        \"name\": \"Unbranded Wooden Mouse\",\n                        \"price\": 651.2,\n                        \"quantity\": 2,\n                        \"total\": 1302.4,\n                        \"orderStatus\": \"pending\",\n                        \"deliveryStatus\": false,\n                        \"deliveryAddress\": {\n                            \"name\": \"Bethany Raynor\",\n                            \"address\": \"09815 Boehm Circles\",\n                            \"city\": \"West Constance\",\n                            \"state\": \"UP\",\n                            \"zip\": \"123465\",\n                            \"phoneNo\": \"922-734-8784\",\n                            \"_id\": \"62524ac0606d917343d996d1\"\n                        },\n                        \"_id\": \"62539078c5e8d418a088a936\"\n                    },\n                    {\n                        \"product\": \"6250ea751a12e90504ef5f0f\",\n                        \"name\": \"Ergonomic Concrete Car\",\n                        \"price\": 918.42,\n                        \"quantity\": 2,\n                        \"total\": 1836.84,\n                        \"orderStatus\": \"pending\",\n                        \"deliveryStatus\": false,\n                        \"deliveryAddress\": {\n                            \"name\": \"Arnold Stroman\",\n                            \"address\": \"553 White Circles\",\n                            \"city\": \"South Etha\",\n                            \"state\": \"UP\",\n                            \"zip\": \"123456\",\n                            \"phoneNo\": \"229-320-9140\",\n                            \"_id\": \"6252ab5dfe54f2a0f6a7aa2a\"\n                        },\n                        \"_id\": \"62539078c5e8d418a088a938\"\n                    }\n                ]\n            },\n            \"total\": 3139.24,\n            \"payment\": \"33c82d1c-12d4-465a-a6c8-4ae14cd44471\",\n            \"_id\": \"62539078c5e8d418a088a935\",\n            \"createdAt\": \"2022-04-11T02:20:40.247Z\",\n            \"__v\": 0\n        },\n        \"user\": {\n            \"_id\": \"624ff5db1e1d6674232488dc\",\n            \"name\": \"ashutosh\",\n            \"email\": \"test6@test.com\",\n            \"status\": \"active\",\n            \"role\": [\n                \"user\"\n            ],\n            \"confirmUserToken\": null,\n            \"confirmUserExpires\": null,\n            \"createdAt\": \"2022-04-08T08:44:11.733Z\",\n            \"__v\": 18,\n            \"addresses\": [\n                {\n                    \"name\": \"Bethany Raynor\",\n                    \"address\": \"09815 Boehm Circles\",\n                    \"city\": \"West Constance\",\n                    \"state\": \"UP\",\n                    \"zip\": \"123465\",\n                    \"phoneNo\": \"922-734-8784\",\n                    \"_id\": \"62524ac0606d917343d996d1\"\n                },\n                {\n                    \"name\": \"Arnold Stroman\",\n                    \"address\": \"553 White Circles\",\n                    \"city\": \"South Etha\",\n                    \"state\": \"UP\",\n                    \"zip\": \"123456\",\n                    \"phoneNo\": \"229-320-9140\",\n                    \"_id\": \"6252ab5dfe54f2a0f6a7aa2a\"\n                }\n            ]\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All Orders",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DOMAIN}}/user/orders",
+							"host": [
+								"{{DOMAIN}}"
+							],
+							"path": [
+								"user",
+								"orders"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get All Orders",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DOMAIN}}/user/orders",
+									"host": [
+										"{{DOMAIN}}"
+									],
+									"path": [
+										"user",
+										"orders"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1010"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3f2-+e29VkDYNBrevE7yknMRuhrmUUM\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 11 Apr 2022 04:40:41 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Orders retrieved successfully\",\n    \"data\": [\n        {\n            \"products\": {\n                \"items\": [\n                    {\n                        \"product\": \"6250eac31a12e90504ef5f30\",\n                        \"name\": \"Unbranded Wooden Mouse\",\n                        \"price\": 651.2,\n                        \"quantity\": 2,\n                        \"total\": 1302.4,\n                        \"orderStatus\": \"pending\",\n                        \"deliveryStatus\": false,\n                        \"deliveryAddress\": {\n                            \"name\": \"Bethany Raynor\",\n                            \"address\": \"09815 Boehm Circles\",\n                            \"city\": \"West Constance\",\n                            \"state\": \"UP\",\n                            \"zip\": \"123465\",\n                            \"phoneNo\": \"922-734-8784\",\n                            \"_id\": \"62524ac0606d917343d996d1\"\n                        },\n                        \"_id\": \"62539078c5e8d418a088a936\"\n                    },\n                    {\n                        \"product\": \"6250ea751a12e90504ef5f0f\",\n                        \"name\": \"Ergonomic Concrete Car\",\n                        \"price\": 918.42,\n                        \"quantity\": 2,\n                        \"total\": 1836.84,\n                        \"orderStatus\": \"pending\",\n                        \"deliveryStatus\": false,\n                        \"deliveryAddress\": {\n                            \"name\": \"Arnold Stroman\",\n                            \"address\": \"553 White Circles\",\n                            \"city\": \"South Etha\",\n                            \"state\": \"UP\",\n                            \"zip\": \"123456\",\n                            \"phoneNo\": \"229-320-9140\",\n                            \"_id\": \"6252ab5dfe54f2a0f6a7aa2a\"\n                        },\n                        \"_id\": \"62539078c5e8d418a088a938\"\n                    }\n                ]\n            },\n            \"_id\": \"62539078c5e8d418a088a935\",\n            \"user\": \"624ff5db1e1d6674232488dc\",\n            \"total\": 3139.24,\n            \"payment\": \"33c82d1c-12d4-465a-a6c8-4ae14cd44471\",\n            \"createdAt\": \"2022-04-11T02:20:40.247Z\",\n            \"__v\": 0\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get a single order",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{DOMAIN}}/user/order/62539078c5e8d418a088a935",
+							"host": [
+								"{{DOMAIN}}"
+							],
+							"path": [
+								"user",
+								"order",
+								"62539078c5e8d418a088a935"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get a single order",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{DOMAIN}}/user/order/62539078c5e8d418a088a935",
+									"host": [
+										"{{DOMAIN}}"
+									],
+									"path": [
+										"user",
+										"order",
+										"62539078c5e8d418a088a935"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1007"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3ef-W2wIUFHrFQfTQKn2CN9xjQlIsKY\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 11 Apr 2022 04:43:16 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Order retrieved successfully\",\n    \"data\": {\n        \"products\": {\n            \"items\": [\n                {\n                    \"product\": \"6250eac31a12e90504ef5f30\",\n                    \"name\": \"Unbranded Wooden Mouse\",\n                    \"price\": 651.2,\n                    \"quantity\": 2,\n                    \"total\": 1302.4,\n                    \"orderStatus\": \"pending\",\n                    \"deliveryStatus\": false,\n                    \"deliveryAddress\": {\n                        \"name\": \"Bethany Raynor\",\n                        \"address\": \"09815 Boehm Circles\",\n                        \"city\": \"West Constance\",\n                        \"state\": \"UP\",\n                        \"zip\": \"123465\",\n                        \"phoneNo\": \"922-734-8784\",\n                        \"_id\": \"62524ac0606d917343d996d1\"\n                    },\n                    \"_id\": \"62539078c5e8d418a088a936\"\n                },\n                {\n                    \"product\": \"6250ea751a12e90504ef5f0f\",\n                    \"name\": \"Ergonomic Concrete Car\",\n                    \"price\": 918.42,\n                    \"quantity\": 2,\n                    \"total\": 1836.84,\n                    \"orderStatus\": \"pending\",\n                    \"deliveryStatus\": false,\n                    \"deliveryAddress\": {\n                        \"name\": \"Arnold Stroman\",\n                        \"address\": \"553 White Circles\",\n                        \"city\": \"South Etha\",\n                        \"state\": \"UP\",\n                        \"zip\": \"123456\",\n                        \"phoneNo\": \"229-320-9140\",\n                        \"_id\": \"6252ab5dfe54f2a0f6a7aa2a\"\n                    },\n                    \"_id\": \"62539078c5e8d418a088a938\"\n                }\n            ]\n        },\n        \"_id\": \"62539078c5e8d418a088a935\",\n        \"user\": \"624ff5db1e1d6674232488dc\",\n        \"total\": 3139.24,\n        \"payment\": \"33c82d1c-12d4-465a-a6c8-4ae14cd44471\",\n        \"createdAt\": \"2022-04-11T02:20:40.247Z\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Address",
+			"item": [
+				{
+					"name": "Add Address",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"{{$randomFullName}}\",\n    \"address\": \"{{$randomStreetAddress}}\",\n    \"city\": \"{{$randomCity}}\",\n    \"state\": \"UP\",\n    \"zip\": \"123456\",\n    \"phoneNo\": \"{{$randomPhoneNumber}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DOMAIN}}/user/addAddress",
+							"host": [
+								"{{DOMAIN}}"
+							],
+							"path": [
+								"user",
+								"addAddress"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update address",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"{{$randomFullName}}\",\n    \"address\": \"{{$randomStreetAddress}}\",\n    \"city\": \"{{$randomCity}}\",\n    \"state\": \"UP\",\n    \"zip\": \"123465\",\n    \"phoneNo\": \"{{$randomPhoneNumber}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DOMAIN}}/user/updateAddress/625248d7416dac59fbc4d7c6",
+							"host": [
+								"{{DOMAIN}}"
+							],
+							"path": [
+								"user",
+								"updateAddress",
+								"625248d7416dac59fbc4d7c6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Address",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{DOMAIN}}/user/deleteAddress/6252ab64fe54f2a0f6a7aa2e",
+							"host": [
+								"{{DOMAIN}}"
+							],
+							"path": [
+								"user",
+								"deleteAddress",
+								"6252ab64fe54f2a0f6a7aa2e"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "Test email",
+			"value": "test1@test.com"
+		},
+		{
+			"key": "Test password",
+			"value": "Test"
+		},
+		{
+			"key": "Test Password",
+			"value": "Test@1234"
+		}
+	]
+}
