@@ -108,11 +108,14 @@
 | POST | /api/v1/captureRazorpayPayment | Capture the details for razorpay payment |
 ---
 
+## MODEL
+![model](./model.png)
 
 
 ## TODOs
 - Add openapi documentation
-
+- Add Test for all the routes
+- Update models png.
 
 ## Contributing
 
